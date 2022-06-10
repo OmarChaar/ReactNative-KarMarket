@@ -1,32 +1,17 @@
 import { StyleSheet, View, Alert, Image, Text } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } from 'expo-location'
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
 
 import { getMapPreview } from '../../util/location';
 import ButtonIcon from '../UI/ButtonIcon';
 import { GlobalStyles } from '../../constants/styles';
 
-function LocationPicker() {
-
-    const navigation = useNavigation();
+function LocationPicker({onTakeLocation}) {
 
     const [locationPermission, requestPermission] = useForegroundPermissions();
 
-    async function verifyPermissions() {
-       if(locationPermission.status === PermissionStatus.UNDETERMINED) {
-        const permissionResponse = await requestPermission();
-
-        return permissionResponse.granted;
-    }
-
-    if(locationPermission.status === PermissionStatus.DENIED) {
-        Alert.alert('No Location Permissions', 'Please grant permissions for the location.');
-        return false;
-    }
-
-    return true;
-    }
+    const [pickedLocation, setPickedLocation] = useState();
 
 
     async function getLocationHandler() {
@@ -45,11 +30,51 @@ function LocationPicker() {
 
     }
 
+    const navigation = useNavigation();
+    const route = useRoute();
+
+    const isFocused = useIsFocused();
+
+    useEffect(() => {
+        if(isFocused && route.params) {
+            const mapPickedLocation = {
+                lat: route.params.pickedLocation.lat, 
+                lng: route.params.pickedLocation.lng
+            };
+            setPickedLocation({
+                latitude: mapPickedLocation.lat, 
+                longitude: mapPickedLocation.lng
+            });
+
+           
+        }
+    }, [route, isFocused]);
+
+    useEffect(() => {
+        onTakeLocation(pickedLocation);
+    }, [pickedLocation, onTakeLocation])
+
+    async function verifyPermissions() {
+       if(locationPermission.status === PermissionStatus.UNDETERMINED) {
+        const permissionResponse = await requestPermission();
+
+        return permissionResponse.granted;
+    }
+
+    if(locationPermission.status === PermissionStatus.DENIED) {
+        Alert.alert('No Location Permissions', 'Please grant permissions for the location.');
+        return false;
+    }
+
+    return true;
+    }
+
+
+
     function pickOnMapHandler() {
         navigation.navigate("Map");
     }
 
-    const [pickedLocation, setPickedLocation] = useState();
 
     let mapPreview = <Text>No locaation added yet.</Text>
 
