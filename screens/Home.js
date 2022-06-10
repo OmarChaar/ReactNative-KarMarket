@@ -1,12 +1,9 @@
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useLayoutEffect } from 'react';
-import { Ionicons } from '@expo/vector-icons'; 
 
 import ItemsList from '../components/Items/ItemsList';
-import { GlobalStyles } from '../constants/styles';
 import IconButton from '../components/UI/IconButton';
-
 
 function Home({navigation, route}) {
 
@@ -24,7 +21,6 @@ function Home({navigation, route}) {
         <View style={styles.container}>
             <ItemsList />
         </View>
-    
     )
 }
 

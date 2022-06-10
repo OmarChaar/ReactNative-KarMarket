@@ -2,7 +2,6 @@
 import { useLayoutEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View, Text, TextInput } from 'react-native';
 import Button from '../components/UI/Button';
-import ButtonIcon from '../components/UI/ButtonIcon';
 import ImagePicker from '../components/Items/ImagePicker';
 import { GlobalStyles } from '../constants/styles';
 import LocationPicker from '../components/Items/LocationPicker';

@@ -1,5 +1,4 @@
-import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { GlobalStyles } from '../../constants/styles';
+import { StyleSheet, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 
 function IconButton({ name, size, color, onPress }) {

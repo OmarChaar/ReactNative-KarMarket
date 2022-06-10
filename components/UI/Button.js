@@ -1,6 +1,5 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
-import { Ionicons } from '@expo/vector-icons'; 
 
 function Button({ children, small, onPress }) {
     return (

@@ -1,5 +1,5 @@
 import MapView, { Marker } from "react-native-maps";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 function Map() {
     const region = {
