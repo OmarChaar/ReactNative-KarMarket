@@ -26,7 +26,10 @@ export default function App() {
               headerStyle: {
                 backgroundColor: GlobalStyles.colors.header,
               },
-              headerTintColor: GlobalStyles.colors.headerText
+              headerTintColor: GlobalStyles.colors.headerText,
+              contentStyle: {
+                backgroundColor: GlobalStyles.colors.background
+              }
             }}
           >
             <Stack.Screen 
