@@ -1,4 +1,4 @@
-class Item {
+export default class Item {
     constructor(title, image, address, location) {
         this.title = title;
         this.image = image;

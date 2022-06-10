@@ -5,7 +5,7 @@ import Button from '../components/UI/Button';
 import ImagePicker from '../components/Items/ImagePicker';
 import { GlobalStyles } from '../constants/styles';
 import LocationPicker from '../components/Items/LocationPicker';
-
+import Item from '../models/item'
 
 function AddPlace({navigation}) {
     const [enteredTitle, setEnteredTitle] = useState('');
@@ -35,7 +35,8 @@ function AddPlace({navigation}) {
     }, [])
 
     function saveHandler() {
-        console.log(enteredTitle, takenImage, takenLocation);
+        const newItem = new Item(enteredTitle, takenImage, 'ADDRESS', takenLocation);
+        console.log(newItem);
     }
 
     return (
