@@ -5,7 +5,7 @@ import ButtonIcon from '../UI/ButtonIcon';
 import { launchCameraAsync, useCameraPermissions, PermissionStatus } from 'expo-image-picker';
 import { GlobalStyles } from '../../constants/styles';
 
-function ImagePicker() {
+function ImagePicker({onTakeImage}) {
     /*
         Here we set/check Camera permission for IOS
     */
@@ -42,7 +42,7 @@ function ImagePicker() {
             quality: 0.5,
         });
         setPickedImage(image.uri);
-        // console.log(image);
+        onTakeImage(image.uri);
     }
 
     let imagePreview = <Text>No image taken yet.</Text>

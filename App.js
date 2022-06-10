@@ -28,6 +28,7 @@ export default function App() {
                 backgroundColor: GlobalStyles.colors.header,
               },
               headerTintColor: GlobalStyles.colors.headerText,
+              headerBackTitleVisible: false,
               contentStyle: {
                 backgroundColor: GlobalStyles.colors.background
               }

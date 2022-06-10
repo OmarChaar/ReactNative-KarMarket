@@ -1,5 +1,5 @@
 
-import { useLayoutEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View, Text, TextInput } from 'react-native';
 import Button from '../components/UI/Button';
 import ImagePicker from '../components/Items/ImagePicker';
@@ -7,8 +7,7 @@ import { GlobalStyles } from '../constants/styles';
 import LocationPicker from '../components/Items/LocationPicker';
 
 
-function AddPlace({navigation, route}) {
-
+function AddPlace({navigation}) {
     const [enteredTitle, setEnteredTitle] = useState('');
 
     function changeTitleHander(enteredText) {
@@ -21,7 +20,23 @@ function AddPlace({navigation, route}) {
             headerTitleAlign: 'left',
             headerBackTitleVisible: false,
         })
-    }, [navigation])
+    }, [navigation]);
+
+    const [takenImage, setTakenImage] = useState();
+
+    function takeImageHandler(image) {
+        setTakenImage(image);
+    }
+
+    const [takenLocation, setTakenLocation] = useState();
+
+    const takeLocationHandler = useCallback((location) => {
+        setTakenLocation(location);
+    }, [])
+
+    function saveHandler() {
+        console.log(enteredTitle, takenImage, takenLocation);
+    }
 
     return (
         <ScrollView style={styles.container}>
@@ -34,11 +49,14 @@ function AddPlace({navigation, route}) {
                     value={enteredTitle}
                 />
 
-                <ImagePicker/>
+                <ImagePicker onTakeImage={takeImageHandler}/>
 
-                <LocationPicker/>
+                <LocationPicker onTakeLocation={takeLocationHandler}/>
 
-                <Button>Add Place</Button>
+                <View style={styles.buttonContainer}>
+                    <Button onPress={saveHandler}>Add Place</Button>
+                </View>
+            
             </View>
         </ScrollView>
     )
@@ -64,5 +82,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 6,
         paddingVertical: 12
     },
-
+    buttonContainer: {
+        marginBottom: 24
+    }
 });
