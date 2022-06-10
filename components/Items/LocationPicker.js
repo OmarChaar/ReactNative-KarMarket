@@ -1,14 +1,17 @@
 import { StyleSheet, View, Alert, Image, Text } from 'react-native';
 import { useState } from 'react';
 import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } from 'expo-location'
+import { useNavigation } from '@react-navigation/native';
 
+import { getMapPreview } from '../../util/location';
 import ButtonIcon from '../UI/ButtonIcon';
 import { GlobalStyles } from '../../constants/styles';
 
 function LocationPicker() {
 
-    const [locationPermission, requestPermission] = useForegroundPermissions();
+    const navigation = useNavigation();
 
+    const [locationPermission, requestPermission] = useForegroundPermissions();
 
     async function verifyPermissions() {
        if(locationPermission.status === PermissionStatus.UNDETERMINED) {
@@ -35,20 +38,23 @@ function LocationPicker() {
 
         const currentLocation = await getCurrentPositionAsync();
 
-        setPickedLocation({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude});
-        // console.log(currentLocation.coords);
+        setPickedLocation({
+            latitude: currentLocation.coords.latitude, 
+            longitude: currentLocation.coords.longitude
+        });
+
     }
 
-    async function pickOnMapHandler() {
-       
+    function pickOnMapHandler() {
+        navigation.navigate("Map");
     }
 
-    const [pickedLocation, setPickedLocation] = useState({});
+    const [pickedLocation, setPickedLocation] = useState();
 
     let mapPreview = <Text>No locaation added yet.</Text>
 
     if(pickedLocation) {
-        mapPreview = <Text>Lat: {pickedLocation.latitude}, Lng: {pickedLocation.longitude}</Text>
+        mapPreview = <Image style={styles.map} source={{uri: getMapPreview(pickedLocation.latitude, pickedLocation.longitude)}}/>
     }
 
     return (
@@ -80,7 +86,8 @@ const styles = StyleSheet.create({
    },
    map: {
        width: '100%',
-       height: '100%'
+       height: '100%',
+       borderRadius: 4
    },
    mapButtons: {
     flexDirection: 'row',

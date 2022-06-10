@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from './screens/Home';
 import AddPlace from './screens/AddPlace';
 import { GlobalStyles } from './constants/styles';
+import Map from './screens/Map';
 
 
 const Stack = createNativeStackNavigator();
@@ -39,6 +40,10 @@ export default function App() {
             <Stack.Screen 
               name='AddPlace'
               component={AddPlace}
+            />
+             <Stack.Screen 
+              name='Map'
+              component={Map}
             />
           </Stack.Navigator>
 
