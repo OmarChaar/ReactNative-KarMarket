@@ -1,7 +1,7 @@
 import { StyleSheet, View, Alert, Image, Text } from 'react-native';
 import { useState } from 'react';
 
-import ButtonIcon from './ButtonIcon';
+import ButtonIcon from '../UI/ButtonIcon';
 import { launchCameraAsync, useCameraPermissions, PermissionStatus } from 'expo-image-picker';
 import { GlobalStyles } from '../../constants/styles';
 
@@ -72,10 +72,12 @@ const styles = StyleSheet.create({
        marginVertical: 12,
        justifyContent: 'center',
        alignItems: 'center',
-       backgroundColor: GlobalStyles.colors.header
+       backgroundColor: GlobalStyles.colors.header,
+       borderRadius: 4
    },
    image: {
        width: '100%',
-       height: '100%'
+       height: '100%',
+       borderRadius: 4
    }
 });

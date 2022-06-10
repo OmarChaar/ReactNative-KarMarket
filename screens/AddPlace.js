@@ -3,8 +3,9 @@ import { useLayoutEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View, Text, TextInput } from 'react-native';
 import Button from '../components/UI/Button';
 import ButtonIcon from '../components/UI/ButtonIcon';
-import ImagePicker from '../components/UI/ImagePicker';
+import ImagePicker from '../components/Items/ImagePicker';
 import { GlobalStyles } from '../constants/styles';
+import LocationPicker from '../components/Items/LocationPicker';
 
 
 function AddPlace({navigation, route}) {
@@ -36,10 +37,7 @@ function AddPlace({navigation, route}) {
 
                 <ImagePicker/>
 
-                <View style={styles.mapButtons}>
-                    <ButtonIcon icon="location" small={true}>Locate User</ButtonIcon>
-                    <ButtonIcon icon="map" small={true}>Pick on Map</ButtonIcon>
-                </View>
+                <LocationPicker/>
 
                 <Button>Add Place</Button>
             </View>
@@ -67,8 +65,5 @@ const styles = StyleSheet.create({
         paddingHorizontal: 6,
         paddingVertical: 12
     },
-    mapButtons: {
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    }
+
 });
