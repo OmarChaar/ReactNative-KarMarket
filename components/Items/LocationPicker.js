@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } from 'expo-location'
 import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
 
-import { getMapPreview } from '../../util/location';
+import { getMapPreview, getReadableAddress } from '../../util/location';
 import ButtonIcon from '../UI/ButtonIcon';
 import { GlobalStyles } from '../../constants/styles';
+import { add } from 'react-native-reanimated';
 
 function LocationPicker({onTakeLocation}) {
 
@@ -24,8 +25,8 @@ function LocationPicker({onTakeLocation}) {
         const currentLocation = await getCurrentPositionAsync();
 
         setPickedLocation({
-            latitude: currentLocation.coords.latitude, 
-            longitude: currentLocation.coords.longitude
+            lat: currentLocation.coords.latitude, 
+            lng: currentLocation.coords.longitude
         });
 
     }
@@ -42,8 +43,8 @@ function LocationPicker({onTakeLocation}) {
                 lng: route.params.pickedLocation.lng
             };
             setPickedLocation({
-                latitude: mapPickedLocation.lat, 
-                longitude: mapPickedLocation.lng
+                lat: mapPickedLocation.lat, 
+                lng: mapPickedLocation.lng
             });
 
            
@@ -51,7 +52,14 @@ function LocationPicker({onTakeLocation}) {
     }, [route, isFocused]);
 
     useEffect(() => {
-        onTakeLocation(pickedLocation);
+
+        async function handleLocaation() {
+            if(pickedLocation) {
+                const address = await getReadableAddress(pickedLocation.lat, pickedLocation.lng);
+                onTakeLocation({...pickedLocation, address: address});
+            }
+        }
+        handleLocaation();
     }, [pickedLocation, onTakeLocation])
 
     async function verifyPermissions() {
@@ -68,7 +76,6 @@ function LocationPicker({onTakeLocation}) {
 
     return true;
     }
-
 
 
     function pickOnMapHandler() {

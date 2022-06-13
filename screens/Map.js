@@ -2,6 +2,7 @@ import MapView, { Marker } from "react-native-maps";
 import { StyleSheet, Alert } from 'react-native';
 import { useState, useLayoutEffect, useCallback } from "react";
 import IconButton from '../components/UI/IconButton';
+import { getReadableAddress } from "../util/location";
 
 function Map({navigation}) {
 
@@ -18,7 +19,7 @@ function Map({navigation}) {
         
         const lat = event.nativeEvent.coordinate.latitude;
         const lng = event.nativeEvent.coordinate.longitude;
-
+        
         setSelectedLocation({ lat: lat, lng: lng });
     }
 
