@@ -13,7 +13,7 @@ function ItemsList({items}) {
     }
 
    return (
-       <FlatList data={items} keyExtractor={(item) => item.id} renderItem={({item}) => <Item item={item}/>}/>
+       <FlatList style={styles.list} data={items} keyExtractor={(item) => item.id} renderItem={({item}) => <Item item={item}/>}/>
    )
 }
 
@@ -29,5 +29,8 @@ const styles = StyleSheet.create({
     },
     fallbackText: {
         color: 'white',
+    },
+    list: {
+        width: '100%',
     }
 });
