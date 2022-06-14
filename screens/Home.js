@@ -1,9 +1,10 @@
 
 import { StyleSheet, View } from 'react-native';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 import ItemsList from '../components/Items/ItemsList';
 import IconButton from '../components/UI/IconButton';
+import { useIsFocused } from '@react-navigation/native';
 
 function Home({navigation, route}) {
 
@@ -15,11 +16,21 @@ function Home({navigation, route}) {
                 <IconButton name="add" size={24} color={tintColor} onPress={() =>  navigation.navigate("AddPlace")} />
             ),
         })
-    }, [navigation])
+    }, [navigation]);
+
+    const isFocused = useIsFocused();
+
+    const [loadedItems, setLoadedItems] = useState([]);
+
+    useEffect(() => {
+        if(isFocused && route.params) {
+            setLoadedItems(curItem => [...curItem, route.params.item]);
+        }
+    }, [route, isFocused])
 
     return (
         <View style={styles.container}>
-            <ItemsList />
+            <ItemsList items={loadedItems} />
         </View>
     )
 }

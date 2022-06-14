@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         backgroundColor: GlobalStyles.colors.background
     },
     fallbackText: {
-        color: 'white'
+        color: 'white',
     }
 });

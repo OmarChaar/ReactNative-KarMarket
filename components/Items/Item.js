@@ -3,11 +3,15 @@ import { GlobalStyles } from '../../constants/styles'
 
 function Item({item, onSelect}) {
     return (
-        <Pressable onPress={onSelect}>
-            <Image source={{uri: item.image}}/>
-            <View>
-                <Text>{item.title}</Text>
-                <Text>{item.address}</Text>
+        <Pressable  
+            android_ripple={{color: '#ccc'}} 
+            style={({pressed}) => [styles.container, pressed && styles.pressed]} 
+            onPress={onSelect}
+        >
+            <Image style={styles.image} source={{uri: item.image}}/>
+            <View style={styles.details}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.address}>{item.address}</Text>
             </View>
         </Pressable>
     )
@@ -17,13 +21,32 @@ export default Item;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: 24,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: GlobalStyles.colors.background
+        marginBottom: 24,
     },
-    text: {
-        color: 'white'
+    pressed: {
+        opacity: 0.75,
+        backgroundColor: GlobalStyles.colors.inputBackground,
+        borderRadius: 4
+    },
+    image: {
+        width: '100%',
+        aspectRatio: 16/9,
+        borderTopRightRadius: 4,
+        borderTopLeftRadius: 4
+    },
+    details: {
+        padding: 12,
+        backgroundColor: GlobalStyles.colors.header,
+        borderBottomRightRadius: 4,
+        borderBottomLeftRadius: 4
+    },
+    title: {
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 12
+    },
+    address: {
+        color: GlobalStyles.colors.primaryText
     }
 });
