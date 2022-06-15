@@ -4,19 +4,26 @@ import { useState, useLayoutEffect, useCallback } from "react";
 import IconButton from '../components/UI/IconButton';
 import { getReadableAddress } from "../util/location";
 
-function Map({navigation}) {
+function Map({navigation, route}) {
 
-    const [selectedLocation, setSelectedLocation] = useState();
+    const initialLocation = route.params && {
+        lat: route.params.initialLat, 
+        lng: route.params.initialLng
+    };
+
+    const [selectedLocation, setSelectedLocation] = useState(initialLocation);
 
     const region = {
-        latitude: 37.78,
-        longitude: -122.43,
+        latitude: initialLocation ? initialLocation.lat : 37.78,
+        longitude: initialLocation ? initialLocation.lng : -122.43,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
     }
 
     function selectLocationHandler(event) {
-        
+        if(initialLocation) {
+            return;
+        }
         const lat = event.nativeEvent.coordinate.latitude;
         const lng = event.nativeEvent.coordinate.longitude;
         
@@ -44,14 +51,16 @@ function Map({navigation}) {
 
 
     useLayoutEffect(() => {
+        if(initialLocation) {
+            return;
+        }
+
         navigation.setOptions({
-            title: 'Locate Place',
-            headerTitleAlign: 'center',
             headerRight: ({tintColor}) => (
                 <IconButton name="save" size={24} color={tintColor} onPress={savePickedLocationHandler} />
             ),
         })
-    }, [navigation, savePickedLocationHandler])
+    }, [navigation, savePickedLocationHandler, initialLocation])
 
     return (
         <MapView 

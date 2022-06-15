@@ -7,14 +7,29 @@ import Home from './screens/Home';
 import AddPlace from './screens/AddPlace';
 import { GlobalStyles } from './constants/styles';
 import Map from './screens/Map';
+import { deletedb, init } from './util/database';
+import { useEffect, useState } from 'react';
+import AppLoading from 'expo-app-loading';
+import Details from './screens/Details';
 
 
 const Stack = createNativeStackNavigator();
 
-
 export default function App() {
 
+  const [dbInitializedState, setDBInitializedState] = useState(false);
 
+  useEffect(() => {
+    init().then(() => {
+      setDBInitializedState(true);
+    }).catch((err) => {
+      console.log("err",err);
+    });
+  }, []); // an empty array '[]' determines that this will be done once only when it is loaded.
+
+  if(!dbInitializedState) {
+    return <AppLoading />
+  }
 
   return (
     <>
@@ -45,6 +60,17 @@ export default function App() {
              <Stack.Screen 
               name='Map'
               component={Map}
+              options={{
+                title: 'Locate Place',
+                headerTitleAlign: 'center',
+              }}
+            />
+              <Stack.Screen 
+              name='Details'
+              component={Details}
+              options={{
+                title: 'Loading Item...'
+              }}
             />
           </Stack.Navigator>
 

@@ -2,11 +2,12 @@ import { StyleSheet, View, Text, Image, Pressable } from 'react-native';
 import { GlobalStyles } from '../../constants/styles'
 
 function Item({item, onSelect}) {
+
     return (
         <Pressable  
             android_ripple={{color: '#ccc'}} 
             style={({pressed}) => [styles.container, pressed && styles.pressed]} 
-            onPress={onSelect}
+            onPress={onSelect.bind(this, item.id)}
         >
             <Image style={styles.image} source={{uri: item.image}}/>
             <View style={styles.details}>
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.15,
         shadowOffset: { width: 1, height: 1 },
         shadowRadius: 2,
-        elevation: 2
+        elevation: 2,
     },
     pressed: {
         opacity: 0.75,
@@ -40,14 +41,14 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         borderBottomLeftRadius: 4,
-        borderTopLeftRadius: 4
+        borderTopLeftRadius: 4,
     },
     details: {
         flex: 2,
         padding: 12,
         backgroundColor: GlobalStyles.colors.header,
         borderBottomRightRadius: 4,
-        borderTopRightRadius: 4
+        borderTopRightRadius: 4,
     },
     title: {
         color: 'white',

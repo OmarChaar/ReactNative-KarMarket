@@ -1,6 +1,7 @@
 import { useCallback, useLayoutEffect, useState } from 'react';
 
 import AddPlaceForm from "../components/Items/AddPlaceForm";
+import { insert } from '../util/database';
 
 function AddPlace({navigation}) {
  
@@ -12,8 +13,10 @@ function AddPlace({navigation}) {
         })
     }, [navigation]);
 
-    function createItemHandler(item) {
-        navigation.navigate('Home', {item: item})
+    async function createItemHandler(item) {
+        console.log("item", item);
+        await insert(item);
+        navigation.navigate('Home')
     }
 
     return (

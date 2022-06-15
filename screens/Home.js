@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import ItemsList from '../components/Items/ItemsList';
 import IconButton from '../components/UI/IconButton';
 import { useIsFocused } from '@react-navigation/native';
+import { fetch } from '../util/database';
 
 function Home({navigation, route}) {
 
@@ -23,10 +24,15 @@ function Home({navigation, route}) {
     const [loadedItems, setLoadedItems] = useState([]);
 
     useEffect(() => {
-        if(isFocused && route.params) {
-            setLoadedItems(curItem => [...curItem, route.params.item]);
+
+        async function loadItems() {
+            const items = await fetch();
+            setLoadedItems(items);
         }
-    }, [route, isFocused])
+        if(isFocused) {
+            loadItems();
+        }
+    }, [isFocused])
 
     return (
         <View style={styles.container}>
