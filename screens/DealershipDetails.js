@@ -4,47 +4,49 @@ import Button from "../components/UI/Button";
 import ButtonIcon from "../components/UI/ButtonIcon";
 import { GlobalStyles } from "../constants/styles";
 import { fetchItem } from "../util/database";
+import { fetchDealership } from "../util/firebase";
 
-function Details({route, navigation}) {
+function DealershipDetails({route, navigation}) {
 
-    const selectedItemID = route.params.itemID;
+    const selectedDealershipID = route.params.dealershipID;
 
-    const [selectedItem, setSelectedItem] = useState();
+    const [selectedDealership, setSelectedDealership] = useState();
     
     useEffect(() => {
-        async function fetchItemHandler() {
-            const fetchedItem = await fetchItem(selectedItemID);
-            setSelectedItem(fetchedItem);
+        async function fetchDealershipHandler() {
+            const fetchedItem = await fetchDealership(selectedDealershipID);
+
+            setSelectedDealership(fetchedItem);
 
             navigation.setOptions({
-                title: fetchedItem.title
+                title: fetchedItem.name
             })
         }
 
-        fetchItemHandler();
-    }, [selectedItemID]);
+        fetchDealershipHandler();
+    }, [selectedDealershipID]);
 
     function showOnMapHandler() {
         navigation.navigate('Map', {
-            initialLat: selectedItem.location.lat,
-            initialLng: selectedItem.location.lng,
+            initialLat: selectedDealership.location.lat,
+            initialLng: selectedDealership.location.lng,
         });
     }
 
-    if(!selectedItem) {
+    if(!selectedDealership) {
         return (
             <View style={styles.loadingContainer}>
-                <Text style={styles.loadingText}>Loading Selected Item...</Text>
+                <Text style={styles.loadingText}>Loading Selected Dealership...</Text>
             </View>
         )
     }
 
     return (
         <ScrollView>
-            <Image style={styles.image} source={{uri: selectedItem.image}}/>
+            <Image style={styles.image} source={{uri: selectedDealership.images[0]}}/>
             <View style={styles.locationContainer}>
                 <View style={styles.addressContainer}>
-                    <Text style={styles.address}>{selectedItem.address}</Text>
+                    <Text style={styles.address}>{selectedDealership.address}</Text>
                 </View>
                     <ButtonIcon name="map" onPress={showOnMapHandler}>View on Map</ButtonIcon>
             </View>
@@ -52,7 +54,7 @@ function Details({route, navigation}) {
     )
 }
 
-export default Details;
+export default DealershipDetails;
 
 const styles = StyleSheet.create({
     loadingContainer: {

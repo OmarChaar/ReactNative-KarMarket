@@ -7,18 +7,20 @@
     *phone: 'DEALERSHIP PHONE NUMBER'
     website: 'DEALERSHIP WEBSITE'
     email: 'DEALERSHIP EMAIL',
+    *operationalHours: '{ Monday: 8:00-16:00, Tuesday: 8:00-16:00, etc... }'
     *hasFinancing: 'true, false'
 */
 export default class Dealership {
-    constructor(id, name, image, location, phone, website, email, hasFinancing) {
+    constructor(id, name, images, address, location, phone, website, email, operationalHours, hasFinancing) {
         this.id = id;
         this.name = name;
-        this.image = image;
-        this.address = location.address;
+        this.images = images;
+        this.address = address;
         this.location = { lat: location.lat, lng: location.lng };
         this.phone = phone;
         this.website = website;
         this.email = email;
+        this.operationalHours = operationalHours;
         this.hasFinancing = hasFinancing;
     }
 }

@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Home from './screens/Home';
+import Dealerships from './screens/Dealerships';
 import AddPlace from './screens/AddPlace';
 import { GlobalStyles } from './constants/styles';
 import Map from './screens/Map';
 import { deletedb, init } from './util/database';
 import { useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import Details from './screens/Details';
+import DealershipDetails from './screens/DealershipDetails';
 
 
 const Stack = createNativeStackNavigator();
@@ -50,8 +50,8 @@ export default function App() {
             }}
           >
             <Stack.Screen 
-              name='Home'
-              component={Home}
+              name='Dealerships'
+              component={Dealerships}
             />
             <Stack.Screen 
               name='AddPlace'
@@ -66,8 +66,8 @@ export default function App() {
               }}
             />
               <Stack.Screen 
-              name='Details'
-              component={Details}
+              name='DealershipDetails'
+              component={DealershipDetails}
               options={{
                 title: 'Loading Item...'
               }}

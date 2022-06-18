@@ -1,32 +1,32 @@
 import { StyleSheet, FlatList, View, Text } from "react-native";
-import Item from "./Item";
+import DealershipCard from "./DealershipCard";
 import { GlobalStyles } from '../../constants/styles';
 import { useNavigation } from "@react-navigation/native";
 
-function ItemsList({items}) {
+function DealershipsList({dealerships}) {
 
     const navigation = useNavigation();
 
-    function selectItemHandler(id) {
-        navigation.navigate('Details', {
-            itemID: id
+    function selectDealershipHandler(id) {
+        navigation.navigate('DealershipDetails', {
+            dealershipID: id
         })
     }
 
-    if(!items || items.length == 0) {
+    if(!dealerships || dealerships.length == 0) {
         return (
             <View style={styles.fallbackContainer}>
-                <Text style={styles.fallbackText}>No places added yet - start adding some!</Text>
+                <Text style={styles.fallbackText}>No dealerships available yet!</Text>
             </View>
         )
     }
 
    return (
-       <FlatList style={styles.list} data={items} keyExtractor={(item) => item.id} renderItem={({item}) => <Item item={item} onSelect={selectItemHandler}/>}/>
+       <FlatList style={styles.list} data={dealerships} keyExtractor={(item) => item.id} renderItem={({item}) => <DealershipCard dealership={item} onSelect={selectDealershipHandler}/>}/>
    )
 }
 
-export default ItemsList;
+export default DealershipsList;
 
 const styles = StyleSheet.create({
     fallbackContainer: {
