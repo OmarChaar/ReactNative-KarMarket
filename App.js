@@ -11,6 +11,7 @@ import { deletedb, init } from './util/database';
 import { useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import DealershipDetails from './screens/DealershipDetails';
+import Home from './screens/Home';
 
 
 const Stack = createNativeStackNavigator();
@@ -49,6 +50,10 @@ export default function App() {
               }
             }}
           >
+            <Stack.Screen 
+              name='Home'
+              component={Home}
+            />
             <Stack.Screen 
               name='Dealerships'
               component={Dealerships}

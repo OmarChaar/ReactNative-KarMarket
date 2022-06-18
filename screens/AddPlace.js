@@ -14,7 +14,6 @@ function AddPlace({navigation}) {
     }, [navigation]);
 
     async function createItemHandler(item) {
-        console.log("item", item);
         await insert(item);
         navigation.navigate('Home')
     }

@@ -37,7 +37,6 @@ function Dealerships({navigation}) {
                     const dealerships = await fetchDealerships();
                     setHasFetched(true);
                     setLoadedDealerships(dealerships);
-                    console.log("dealerships", dealerships);
                 }
                 catch(error) {
                     setError('Could not fetch data from database.');
