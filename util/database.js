@@ -1,5 +1,4 @@
 import * as SQLite from 'expo-sqlite';
-import Item from '../models/item';
 
 const database = SQLite.openDatabase('items.db');
 
@@ -59,16 +58,16 @@ export function fetch() {
                     const items = [];
                     for(const dp of result.rows._array) {
                         items.push(
-                            new Item(
-                                dp.title, 
-                                dp.image, 
-                                {
-                                    address: dp.address,
-                                    lat: dp.lat, 
-                                    lng: dp.lng,
-                                },
-                                dp.id
-                            )
+                            // new Item(
+                            //     dp.title, 
+                            //     dp.image, 
+                            //     {
+                            //         address: dp.address,
+                            //         lat: dp.lat, 
+                            //         lng: dp.lng,
+                            //     },
+                            //     dp.id
+                            // )
                         );
                     }
                     resolve(items);
@@ -91,17 +90,17 @@ export function fetchItem(id) {
                 [id],
                 (_, result) => {
                     const fetched = result.rows._array[0];
-                    const item = new Item(
-                        fetched.title, 
-                        fetched.image, 
-                        {
-                            address: fetched.address, 
-                            lat: fetched.lat,
-                            lng: fetched.lng
-                        },
-                        fetched.id
-                    );
-                    resolve(item);
+                    // const item = new Item(
+                    //     fetched.title, 
+                    //     fetched.image, 
+                    //     {
+                    //         address: fetched.address, 
+                    //         lat: fetched.lat,
+                    //         lng: fetched.lng
+                    //     },
+                    //     fetched.id
+                    // );
+                    // resolve(item);
                 },
                 (_, error) => {
                     reject(error);

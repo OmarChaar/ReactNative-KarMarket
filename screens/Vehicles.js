@@ -5,15 +5,16 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import DealershipsList from '../components/UX/DealershipsList';
 import IconButton from '../components/UI/IconButton';
 import { useIsFocused } from '@react-navigation/native';
-import { fetchDealerships } from '../util/firebase';
+import { fetchDealerships, fetchVehicles } from '../util/firebase';
 import LoadingOverlay from '../components/UI/LoadingOverlay';
 import ErrorOverlay from '../components/UI/ErrorOverlay';
+import VehiclesList from '../components/UX/VehiclesList';
 
-function Dealerships({navigation}) {
+function Vehicles({navigation}) {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: 'Dealerships',
+            title: 'Vehicles',
             headerTitleAlign: 'left',
             headerRight: ({tintColor}) => (
                 <IconButton name="search" size={24} color={tintColor} onPress={() =>  {}} />
@@ -27,17 +28,16 @@ function Dealerships({navigation}) {
     const [hasFetched, setHasFetched] = useState(false);
     const [error, setError] = useState();
 
-    const [loadedDealerships, setLoadedDealerships] = useState([]);
+    const [loadedVehicles, setLoadedVehicles] = useState([]);
 
     useEffect(() => {
         if(!hasFetched) {
-            async function getDealerships() {
+            async function getVehciles() {
                 setIsFetching(true);
                 try {
-                    const dealerships = await fetchDealerships();
+                    const vehicles = await fetchVehicles();
                     setHasFetched(true);
-                    console.log("dealerships", dealerships);
-                    setLoadedDealerships(dealerships);
+                    setLoadedVehicles(vehicles);
                 }
                 catch(error) {
                     setError('Could not fetch data from database.');
@@ -46,7 +46,7 @@ function Dealerships({navigation}) {
             }
     
             if(isFocused) {
-                getDealerships();
+                getVehciles();
             }
         }
      
@@ -62,12 +62,12 @@ function Dealerships({navigation}) {
 
     return (
         <View style={styles.container}>
-            <DealershipsList dealerships={loadedDealerships} />
+            <VehiclesList vehicles={loadedVehicles} />
         </View>
     )
 }
 
-export default Dealerships;
+export default Vehicles;
 
 const styles = StyleSheet.create({
     container: {

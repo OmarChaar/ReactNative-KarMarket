@@ -11,7 +11,7 @@
     *hasFinancing: 'true, false'
 */
 export default class Dealership {
-    constructor(id, name, images, address, location, phone, website, email, operationalHours, hasFinancing) {
+    constructor(id, name, images, address, location, phone, website, email, operationalHours, hasFinancing, extra) {
         this.id = id;
         this.name = name;
         this.images = images;
@@ -22,5 +22,6 @@ export default class Dealership {
         this.email = email;
         this.operationalHours = operationalHours;
         this.hasFinancing = hasFinancing;
+        this.extra = extra;
     }
 }

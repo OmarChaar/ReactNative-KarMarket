@@ -1,10 +1,11 @@
 import axios from 'axios';
+import Vehicle from '../models/vehicle';
 import Dealership from '../models/dealership';
 
 const ROOT_URL = 'https://us-central1-karmarket-352901.cloudfunctions.net';
 
 export async function fetchDealerships() {
-    const response = await axios.get(ROOT_URL + '/dealerships');
+    const response = await axios.get(ROOT_URL + '/dealerships/');
 
     const dealerships = [];
     
@@ -20,7 +21,8 @@ export async function fetchDealerships() {
                 dealership.website,
                 dealership.email,
                 dealership.operationalHours,
-                dealership.hasFinancing
+                dealership.hasFinancing,
+                dealership.extra
             )
         );
 
@@ -45,10 +47,74 @@ export async function fetchDealership(id) {
         result.website,
         result.email,
         result.operationalHours,
-        result.hasFinancing
+        result.hasFinancing,
+        result.extra
     );
 
-   
-
     return dealership;
+}
+
+export async function fetchVehicles() {
+    const response = await axios.get(ROOT_URL + '/vehicles');
+
+    const vehicles = [];
+    
+    for(const vehicle of response.data) {
+        vehicles.push(
+            new Vehicle(
+                vehicle.id,
+                vehicle.type,
+                vehicle.brand,
+                vehicle.model,
+                vehicle.version,
+                vehicle.year,
+                vehicle.color,
+                vehicle.kilometerage,
+                vehicle.transmission,
+                vehicle.combustion,
+                vehicle.doors,
+                vehicle.finalLicensePlate,
+                vehicle.specs,
+                vehicle.extras,
+                vehicle.documentation,
+                vehicle.armored,
+                vehicle.images,
+                vehicle.price,
+                vehicle.dealership,
+            )
+        );
+
+    }
+    return vehicles;
+}
+
+export async function fetchVehicle(id) {
+    const response = await axios.post(ROOT_URL + "/vehicle/", {
+        id: id
+    });
+
+    const result = response.data;
+
+    const vehicle = new Vehicle(
+        result.id,
+        result.type,
+        result.brand,
+        result.model,
+        result.version,
+        result.year,
+        result.color,
+        result.kilometerage,
+        result.transmission,
+        result.combustion,
+        result.doors,
+        result.finalLicensePlate,
+        result.specs,
+        result.extras,
+        result.documentation,
+        result.armored,
+        result.images,
+        result.price,
+        result.dealership,
+    );
+    return vehicle;
 }

@@ -5,7 +5,7 @@ import Button from '../UI/Button';
 import ImagePicker from './ImagePicker';
 import { GlobalStyles } from '../../constants/styles';
 import LocationPicker from './LocationPicker';
-import Item from '../../models/item'
+// import Item from '../../models/item'
 
 function AddPlaceForm({onCreate}) {
     const [enteredTitle, setEnteredTitle] = useState('');
@@ -27,7 +27,7 @@ function AddPlaceForm({onCreate}) {
     }, [])
 
     function saveHandler() {
-        const itemData = new Item(enteredTitle, takenImage, takenLocation);
+        // const itemData = new Item(enteredTitle, takenImage, takenLocation);
         onCreate(itemData);
     }
 

@@ -7,30 +7,21 @@ import Dealerships from './screens/Dealerships';
 import AddPlace from './screens/AddPlace';
 import { GlobalStyles } from './constants/styles';
 import Map from './screens/Map';
-import { deletedb, init } from './util/database';
 import { useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import DealershipDetails from './screens/DealershipDetails';
 import Home from './screens/Home';
+import Vehicles from './screens/Vehicles';
+import VehicleDetails from './screens/VehicleDetails';
 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  const [dbInitializedState, setDBInitializedState] = useState(false);
-
   useEffect(() => {
-    init().then(() => {
-      setDBInitializedState(true);
-    }).catch((err) => {
-      console.log("err",err);
-    });
+  
   }, []); // an empty array '[]' determines that this will be done once only when it is loaded.
-
-  if(!dbInitializedState) {
-    return <AppLoading />
-  }
 
   return (
     <>
@@ -58,6 +49,10 @@ export default function App() {
               name='Dealerships'
               component={Dealerships}
             />
+              <Stack.Screen 
+              name='Vehicles'
+              component={Vehicles}
+            />
             <Stack.Screen 
               name='AddPlace'
               component={AddPlace}
@@ -70,11 +65,18 @@ export default function App() {
                 headerTitleAlign: 'center',
               }}
             />
-              <Stack.Screen 
+            <Stack.Screen 
               name='DealershipDetails'
               component={DealershipDetails}
               options={{
-                title: 'Loading Item...'
+                title: 'Loading Dealership...'
+              }}
+            />
+             <Stack.Screen 
+              name='VehicleDetails'
+              component={VehicleDetails}
+              options={{
+                title: 'Loading Vehicle...'
               }}
             />
           </Stack.Navigator>

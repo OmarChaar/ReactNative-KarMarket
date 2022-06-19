@@ -6,6 +6,7 @@ function Home({navigation}) {
     return (
         <View style={styles.container}>
             <Button onPress={() => navigation.navigate('Dealerships')}>Dealerships</Button>
+            <Button onPress={() => navigation.navigate('Vehicles')}>Vehicles</Button>
         </View>
     )
 }
