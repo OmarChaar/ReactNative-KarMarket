@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, ScrollView, Image, View, Text } from "react-native";
+import { StyleSheet, ScrollView, Image, View, Text, Dimensions } from "react-native";
 import Button from "../components/UI/Button";
 import ButtonIcon from "../components/UI/ButtonIcon";
 import { GlobalStyles } from "../constants/styles";
 import { fetchItem } from "../util/database";
 import { fetchDealership } from "../util/firebase";
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 function DealershipDetails({route, navigation}) {
 
@@ -42,8 +43,20 @@ function DealershipDetails({route, navigation}) {
     }
 
     return (
-        <ScrollView>
-            <Image style={styles.image} source={{uri: selectedDealership.images[0]}}/>
+        <ScrollView style={styles.container}>
+             <View style={styles.container}>
+                <SwiperFlatList
+                index={0}
+                showPagination
+                data={selectedDealership.images}
+                renderItem={({ item }) => (
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} source={{uri: item}}/>
+                    </View>
+                
+                )}
+                />
+            </View>
             <View style={styles.locationContainer}>
                 <View style={styles.addressContainer}>
                     <Text style={styles.address}>{selectedDealership.address}</Text>
@@ -66,10 +79,16 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'white'
     },
+    container: {
+        flex: 1,
+    },
+    imageContainer:  {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height / 3,
+    },
     image: {
         width: '100%',
-        height: '35%',
-        minHeight: 200
+        height: '100%',
     },
     locationContainer: {
         justifyContent: 'center',
