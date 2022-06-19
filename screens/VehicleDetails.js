@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, ScrollView, Image, View, Text } from "react-native";
+import { StyleSheet, ScrollView, Image, View, Text, Dimensions } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import { fetchVehicle } from "../util/firebase";
 import IconButton from '../components/UI/IconButton';
+import { formatPrice } from "../util/format";
 
 function VehicleDetails({route, navigation}) {
 
@@ -36,12 +37,16 @@ function VehicleDetails({route, navigation}) {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style={styles.container}>
             <Image style={styles.image} source={{uri: selectedVehicle.images.back}}/>
-            <View style={styles.locationContainer}>
-                <View style={styles.addressContainer}>
-                    <Text style={styles.address}>{selectedVehicle.model}</Text>
-                    <Text style={styles.address}>{selectedVehicle.year}</Text>
+            <View style={styles.detailsContainer}>
+                <View style={styles.vehicleName}>
+                    <Text style={styles.brand}>{selectedVehicle.brand}&nbsp;</Text>
+                    <Text style={styles.model}>{selectedVehicle.model}</Text>
+                </View>
+                <Text style={styles.version}>{selectedVehicle.version}</Text>
+                <View style={styles.priceContainer}>
+                    <Text style={styles.price}>R$ {formatPrice(selectedVehicle.price)}</Text>
                 </View>
             </View>
         </ScrollView>
@@ -60,20 +65,37 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'white'
     },
+    container: {
+        flex: 1,
+    },
     image: {
         width: '100%',
-        height: 200,
+        height: Dimensions.get('window').height / 3,
     },
-    locationContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
+    detailsContainer: {
         padding: 12
     },
-    addressContainer: {
-        padding: 20
+    vehicleName: {
+        flexDirection: 'row',
     },
-    address: {
-        color: GlobalStyles.colors.primaryText,
-        textAlign: 'center'
+    brand: {
+        fontSize: GlobalStyles.fontSize.large,
+        fontWeight: 'bold'
+    },
+    model: {
+        color: 'green',
+        fontSize: GlobalStyles.fontSize.large,
+        fontWeight: 'bold'
+    },
+    version: {
+        fontSize: GlobalStyles.fontSize.medium
+    },
+    priceContainer: {
+        marginVertical: 12
+    },
+    price: {
+        fontSize: GlobalStyles.fontSize.xlarge,
+        color: 'red',
+        fontWeight: 'bold'
     }
 })

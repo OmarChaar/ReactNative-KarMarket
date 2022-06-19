@@ -9,5 +9,11 @@ export const GlobalStyles = {
         successText: '#00af20',
         inputBackground: '#4ac5ce',
         button: '#3623c7'
+    },
+    fontSize: {
+        xlarge: 30,
+        large: 24,
+        medium: 20,
+        small: 16
     }
 }
