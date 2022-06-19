@@ -6,6 +6,7 @@ import IconButton from '../components/UI/IconButton';
 import { formatPrice } from "../util/format";
 import RequiredData from "../components/UX/VehicleDetails/RequiredData";
 import AdditionalData from "../components/UX/VehicleDetails/AdditionalData";
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 function VehicleDetails({route, navigation}) {
 
@@ -38,9 +39,34 @@ function VehicleDetails({route, navigation}) {
         )
     }
 
+    const images = [
+        selectedVehicle.images.front,
+        selectedVehicle.images.back,
+        selectedVehicle.images.right,
+        selectedVehicle.images.left,
+        selectedVehicle.images.interior1,
+        selectedVehicle.images.interior2,
+        selectedVehicle.images.trunk,
+        selectedVehicle.images.engine
+    ]
+
     return (
         <ScrollView style={styles.container}>
-            <Image style={styles.image} source={{uri: selectedVehicle.images.back}}/>
+
+            <View style={styles.container}>
+                <SwiperFlatList
+                index={0}
+                showPagination
+                data={images}
+                renderItem={({ item }) => (
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} source={{uri: item}}/>
+                    </View>
+                
+                )}
+                />
+            </View>
+          
             <View style={styles.detailsContainer}>
                 <View style={styles.vehicleName}>
                     <Text style={styles.brand}>{selectedVehicle.brand}&nbsp;</Text>
@@ -54,6 +80,10 @@ function VehicleDetails({route, navigation}) {
                <RequiredData vehicle={selectedVehicle} />
 
                <AdditionalData vehicle={selectedVehicle}/>
+
+               <View>
+                <Text>{selectedVehicle.extras}</Text>
+               </View>
             </View>
         </ScrollView>
     )
@@ -74,9 +104,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    imageContainer:  {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height / 3,
+    },
     image: {
         width: '100%',
-        height: Dimensions.get('window').height / 3,
+        height: '100%',
     },
     detailsContainer: {
         padding: 12
