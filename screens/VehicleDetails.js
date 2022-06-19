@@ -4,6 +4,8 @@ import { GlobalStyles } from "../constants/styles";
 import { fetchVehicle } from "../util/firebase";
 import IconButton from '../components/UI/IconButton';
 import { formatPrice } from "../util/format";
+import RequiredData from "../components/UX/VehicleDetails/RequiredData";
+import AdditionalData from "../components/UX/VehicleDetails/AdditionalData";
 
 function VehicleDetails({route, navigation}) {
 
@@ -48,6 +50,10 @@ function VehicleDetails({route, navigation}) {
                 <View style={styles.priceContainer}>
                     <Text style={styles.price}>R$ {formatPrice(selectedVehicle.price)}</Text>
                 </View>
+
+               <RequiredData vehicle={selectedVehicle} />
+
+               <AdditionalData vehicle={selectedVehicle}/>
             </View>
         </ScrollView>
     )
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: GlobalStyles.fontSize.xlarge,
-        color: 'red',
+        color: 'green',
         fontWeight: 'bold'
-    }
+    },
 })
