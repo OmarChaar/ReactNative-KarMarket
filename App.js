@@ -8,7 +8,6 @@ import AddPlace from './screens/AddPlace';
 import { GlobalStyles } from './constants/styles';
 import Map from './screens/Map';
 import { useEffect, useState } from 'react';
-import AppLoading from 'expo-app-loading';
 import DealershipDetails from './screens/DealershipDetails';
 import Home from './screens/Home';
 import Vehicles from './screens/Vehicles';

@@ -8,7 +8,8 @@
     website: 'DEALERSHIP WEBSITE'
     email: 'DEALERSHIP EMAIL',
     *operationalHours: '{ Monday: 8:00-16:00, Tuesday: 8:00-16:00, etc... }'
-    *hasFinancing: 'true, false'
+    *hasFinancing: 'true, false',
+    extra: 'FURTHER DETAILS ADDED BY THE DEALERSHIP'
 */
 export default class Dealership {
     constructor(id, name, images, address, location, phone, website, email, operationalHours, hasFinancing, extra) {

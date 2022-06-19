@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '35%',
-        minHeight: 100
+        minHeight: 200
     },
     locationContainer: {
         justifyContent: 'center',

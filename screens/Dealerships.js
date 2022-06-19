@@ -36,7 +36,6 @@ function Dealerships({navigation}) {
                 try {
                     const dealerships = await fetchDealerships();
                     setHasFetched(true);
-                    console.log("dealerships", dealerships);
                     setLoadedDealerships(dealerships);
                 }
                 catch(error) {

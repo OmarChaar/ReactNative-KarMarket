@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, ScrollView, Image, View, Text } from "react-native";
-import Button from "../components/UI/Button";
-import ButtonIcon from "../components/UI/ButtonIcon";
 import { GlobalStyles } from "../constants/styles";
-import { fetchItem } from "../util/database";
-import { fetchDealership, fetchVehicle } from "../util/firebase";
+import { fetchVehicle } from "../util/firebase";
+import IconButton from '../components/UI/IconButton';
 
 function VehicleDetails({route, navigation}) {
 
@@ -19,7 +17,10 @@ function VehicleDetails({route, navigation}) {
             setSelectedVehicle(fetchedItem);
 
             navigation.setOptions({
-                title: `${fetchedItem.brand} ${fetchedItem.model}`
+                title: `${fetchedItem.brand} ${fetchedItem.model}`,
+                headerRight: ({tintColor}) => (
+                    <IconButton name="heart-outline" size={24} color={tintColor} onPress={() =>  {}} />
+                ),
             })
         }
 
@@ -61,8 +62,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: '35%',
-        minHeight: 100
+        height: 200,
     },
     locationContainer: {
         justifyContent: 'center',
