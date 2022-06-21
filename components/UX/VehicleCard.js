@@ -1,5 +1,6 @@
-import { StyleSheet, View, Text, Image, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable, Dimensions } from 'react-native';
 import { GlobalStyles } from '../../constants/styles'
+import { formatPrice } from '../../util/format';
 
 function VehicleCard({vehicle, onSelect}) {
 
@@ -11,8 +12,19 @@ function VehicleCard({vehicle, onSelect}) {
         >
             <Image style={styles.image} source={{uri: vehicle.images.front}}/>
             <View style={styles.details}>
-                <Text style={styles.title}>{vehicle.brand}</Text>
-                <Text style={styles.address}>{vehicle.year}</Text>
+                <View style={styles.topDetails}>
+                    <View style={styles.vehicleName}>
+                        <Text style={styles.brand}>{vehicle.brand}&nbsp;</Text>
+                        <Text style={styles.model}>{vehicle.model}</Text>
+                    </View>
+                    <Text style={styles.price}>R$ {formatPrice(vehicle.price)}</Text>
+                </View>
+                <View style={styles.bottomDetails}>
+                    <Text style={styles.detailsText}>{vehicle.year}</Text>
+                    <Text style={styles.detailsText}>{vehicle.kilometerage.toLocaleString()} KM</Text>
+                    <Text style={styles.detailsText}>{vehicle.color}</Text>
+                </View>
+             
             </View>
         </Pressable>
     )
@@ -23,7 +35,7 @@ export default VehicleCard;
 const styles = StyleSheet.create({
     container: {
         marginBottom: 24,
-        flexDirection: 'row',
+        // flexDirection: 'row',
         alignItems: 'flex-start',
         borderRadius: 4,
         shadowColor: 'black',
@@ -38,25 +50,47 @@ const styles = StyleSheet.create({
         borderRadius: 4
     },
     image: {
-        flex: 1,
-        height: '100%',
-        borderBottomLeftRadius: 4,
+        height: Dimensions.get('window').height / 4,
+        width: '100%',
         borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
     },
     details: {
-        flex: 2,
+        width: '100%',
         padding: 12,
         backgroundColor: GlobalStyles.colors.header,
         borderBottomRightRadius: 4,
-        borderTopRightRadius: 4,
+        borderBottomLeftRadius: 4,
     },
-    title: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: 'bold',
+    topDetails: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    price: {
+        fontSize: GlobalStyles.fontSize.medium,
+        color: GlobalStyles.colors.price,
+        fontWeight: 'bold'
+    },
+    vehicleName: {
+        flexDirection: 'row',
         marginBottom: 12
     },
-    address: {
-        color: GlobalStyles.colors.primaryText
+    brand: {
+        fontSize: GlobalStyles.fontSize.medium,
+        fontWeight: 'bold'
+    },
+    model: {
+        color: GlobalStyles.colors.primaryText,
+        fontSize: GlobalStyles.fontSize.medium,
+        fontWeight: 'bold'
+    },
+    bottomDetails: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    detailsText: {
+        color: GlobalStyles.colors.primaryText,
+        fontSize: GlobalStyles.fontSize.small,
+        fontWeight: '500'
     }
 });

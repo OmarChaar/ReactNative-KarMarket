@@ -11,7 +11,7 @@ function ButtonIcon({ children, small, icon, onPress }) {
                 style={({pressed}) => pressed && styles.pressed}
             >
                 <View style={styles.button}>
-                    <Ionicons name={icon} size={14} color={GlobalStyles.colors.primaryText} />
+                    <Ionicons name={icon} size={24} color={GlobalStyles.colors.primaryText } />
                     <Text style={styles.text}>{children}</Text>
                 </View>
             </Pressable>

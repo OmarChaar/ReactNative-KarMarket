@@ -5,16 +5,19 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import DealershipsList from '../components/UX/DealershipsList';
 import IconButton from '../components/UI/IconButton';
 import { useIsFocused } from '@react-navigation/native';
-import { fetchDealerships, fetchVehicles } from '../util/firebase';
+import { fetchDealerships, fetchDealershipVehicles, fetchVehicles } from '../util/firebase';
 import LoadingOverlay from '../components/UI/LoadingOverlay';
 import ErrorOverlay from '../components/UI/ErrorOverlay';
 import VehiclesList from '../components/UX/VehiclesList';
 
-function Vehicles({navigation}) {
+function Vehicles({navigation, route}) {
+
+
+    const dealshipID = route.params ? route.params.id : null;
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: 'Vehicles',
+            title: route.params ? route.params.dealership : 'Vehicles',
             headerTitleAlign: 'left',
             headerRight: ({tintColor}) => (
                 <IconButton name="search" size={24} color={tintColor} onPress={() =>  {}} />
@@ -31,11 +34,12 @@ function Vehicles({navigation}) {
     const [loadedVehicles, setLoadedVehicles] = useState([]);
 
     useEffect(() => {
-        if(!hasFetched) {
+        if(!hasFetched || dealshipID) {
             async function getVehciles() {
                 setIsFetching(true);
                 try {
-                    const vehicles = await fetchVehicles();
+                    const vehicles = dealshipID ? await fetchDealershipVehicles(dealshipID) : await fetchVehicles();
+
                     setHasFetched(true);
                     setLoadedVehicles(vehicles);
                 }
@@ -50,7 +54,7 @@ function Vehicles({navigation}) {
             }
         }
      
-    }, [isFocused]);
+    }, [isFocused, dealshipID]);
 
     if(error && !isFetching) {
         return <ErrorOverlay message={error}/>

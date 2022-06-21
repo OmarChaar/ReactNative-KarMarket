@@ -35,7 +35,7 @@ export async function fetchDealership(id) {
         id: id
     });
 
-    const result = response.data
+    const result = response.data;
 
     const dealership = new Dealership(
         result.id,
@@ -48,7 +48,8 @@ export async function fetchDealership(id) {
         result.email,
         result.operationalHours,
         result.hasFinancing,
-        result.extra
+        result.extra,
+        result.vehicles
     );
 
     return dealership;
@@ -117,4 +118,43 @@ export async function fetchVehicle(id) {
         result.dealership,
     );
     return vehicle;
+}
+
+export async function fetchDealershipVehicles(id) {
+    const response = await axios.post(ROOT_URL + "/dealershipVehicles/", {
+        id: id
+    });
+
+    const vehicles = [];
+    
+    if(response.data.length > 0) {
+        for(const vehicle of response.data) {
+            vehicles.push(
+                new Vehicle(
+                    vehicle.id,
+                    vehicle.type,
+                    vehicle.brand,
+                    vehicle.model,
+                    vehicle.version,
+                    vehicle.year,
+                    vehicle.color,
+                    vehicle.kilometerage,
+                    vehicle.transmission,
+                    vehicle.combustion,
+                    vehicle.doors,
+                    vehicle.finalLicensePlate,
+                    vehicle.specs,
+                    vehicle.extras,
+                    vehicle.documentation,
+                    vehicle.armored,
+                    vehicle.images,
+                    vehicle.price,
+                    vehicle.dealership,
+                )
+            );
+
+        }
+    }
+    
+    return vehicles;
 }

@@ -9,10 +9,11 @@
     email: 'DEALERSHIP EMAIL',
     *operationalHours: '{ Monday: 8:00-16:00, Tuesday: 8:00-16:00, etc... }'
     *hasFinancing: 'true, false',
-    extra: 'FURTHER DETAILS ADDED BY THE DEALERSHIP'
+    extra: 'FURTHER DETAILS ADDED BY THE DEALERSHIP',
+    vehicles: 'ARRAY OF VEHICLES PER DEALERSHIP'
 */
 export default class Dealership {
-    constructor(id, name, images, address, location, phone, website, email, operationalHours, hasFinancing, extra) {
+    constructor(id, name, images, address, location, phone, website, email, operationalHours, hasFinancing, extra, vehicles) {
         this.id = id;
         this.name = name;
         this.images = images;
@@ -24,5 +25,6 @@ export default class Dealership {
         this.operationalHours = operationalHours;
         this.hasFinancing = hasFinancing;
         this.extra = extra;
+        this.vehicles = vehicles;
     }
 }

@@ -16,7 +16,6 @@ function DealershipDetails({route, navigation}) {
     useEffect(() => {
         async function fetchDealershipHandler() {
             const fetchedItem = await fetchDealership(selectedDealershipID);
-
             setSelectedDealership(fetchedItem);
 
             navigation.setOptions({
@@ -32,6 +31,13 @@ function DealershipDetails({route, navigation}) {
             initialLat: selectedDealership.location.lat,
             initialLng: selectedDealership.location.lng,
         });
+    }
+
+    function viewVehiclesHandler() {
+        navigation.navigate('Vehicles', {
+            id: selectedDealership.id,
+            dealership: selectedDealership.name
+        })
     }
 
     if(!selectedDealership) {
@@ -61,7 +67,11 @@ function DealershipDetails({route, navigation}) {
                 <View style={styles.addressContainer}>
                     <Text style={styles.address}>{selectedDealership.address}</Text>
                 </View>
-                    <ButtonIcon name="map" onPress={showOnMapHandler}>View on Map</ButtonIcon>
+                <View style={styles.buttonsContainer}>
+                    <ButtonIcon icon="map" small onPress={showOnMapHandler}>View on Map</ButtonIcon>
+                    <ButtonIcon icon="car-sport-sharp" small onPress={viewVehiclesHandler}>View Vehicles</ButtonIcon>
+
+                </View>
             </View>
         </ScrollView>
     )
@@ -101,5 +111,10 @@ const styles = StyleSheet.create({
     address: {
         color: GlobalStyles.colors.primaryText,
         textAlign: 'center'
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%'
     }
 })

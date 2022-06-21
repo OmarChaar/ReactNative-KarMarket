@@ -55,15 +55,15 @@ function VehicleDetails({route, navigation}) {
 
             <View style={styles.container}>
                 <SwiperFlatList
-                index={0}
-                showPagination
-                data={images}
-                renderItem={({ item }) => (
-                    <View style={styles.imageContainer}>
-                        <Image style={styles.image} source={{uri: item}}/>
-                    </View>
-                
-                )}
+                    index={0}
+                    showPagination
+                    data={images}
+                    renderItem={({ item }) => (
+                        <View style={styles.imageContainer}>
+                            <Image style={styles.image} source={{uri: item}}/>
+                        </View>
+                    
+                    )}
                 />
             </View>
           
