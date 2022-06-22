@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text, Switch } from 'react-native';
-import Dropdown from '../components/UX/Settings/Dropdown';
-import PickerSelect from '../components/UI/PickerSelect';
+import Dropdown from '../../components/UX/Settings/Dropdown';
+import PickerSelect from '../../components/UI/PickerSelect';
 import { useState } from 'react';
-import IconLabel from '../components/UI/IconLabel';
+import IconLabel from '../../components/UI/IconLabel';
 import { GlobalStyles } from '../../constants/styles';
 
 function Settings() {
