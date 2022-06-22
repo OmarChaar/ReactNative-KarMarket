@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, ScrollView, Image, View, Text, Dimensions } from "react-native";
-import { GlobalStyles } from "../constants/styles";
-import { fetchVehicle } from "../util/firebase";
-import IconButton from '../components/UI/IconButton';
-import { formatPrice } from "../util/format";
-import RequiredData from "../components/UX/VehicleDetails/RequiredData";
-import AdditionalData from "../components/UX/VehicleDetails/AdditionalData";
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
+
+import { GlobalStyles } from "../../constants/styles";
+import { fetchVehicle } from "../../util/firebase";
+import IconButton from '../../components/UI/IconButton';
+import { formatPrice } from "../../util/format";
+import RequiredData from "../../components/UX/VehicleDetails/RequiredData";
+import AdditionalData from "../../components/UX/VehicleDetails/AdditionalData";
 
 function VehicleDetails({route, navigation}) {
 

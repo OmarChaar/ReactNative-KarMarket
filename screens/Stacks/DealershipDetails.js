@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, ScrollView, Image, View, Text, Dimensions } from "react-native";
-import Button from "../components/UI/Button";
-import ButtonIcon from "../components/UI/ButtonIcon";
-import { GlobalStyles } from "../constants/styles";
-import { fetchItem } from "../util/database";
-import { fetchDealership } from "../util/firebase";
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
+
+import ButtonIcon from "../../components/UI/ButtonIcon";
+import { GlobalStyles } from "../../constants/styles";
+import { fetchDealership } from "../../util/firebase";
 
 function DealershipDetails({route, navigation}) {
 

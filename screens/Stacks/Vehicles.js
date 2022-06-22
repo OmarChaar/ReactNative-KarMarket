@@ -1,14 +1,13 @@
 
 import { StyleSheet, View } from 'react-native';
 import { useEffect, useLayoutEffect, useState } from 'react';
-
-import DealershipsList from '../components/UX/DealershipsList';
-import IconButton from '../components/UI/IconButton';
 import { useIsFocused } from '@react-navigation/native';
-import { fetchDealerships, fetchDealershipVehicles, fetchVehicles } from '../util/firebase';
-import LoadingOverlay from '../components/UI/LoadingOverlay';
-import ErrorOverlay from '../components/UI/ErrorOverlay';
-import VehiclesList from '../components/UX/VehiclesList';
+
+import IconButton from '../../components/UI/IconButton';
+import { fetchDealershipVehicles, fetchVehicles } from '../../util/firebase';
+import LoadingOverlay from '../../components/UI/LoadingOverlay';
+import ErrorOverlay from '../../components/UI/ErrorOverlay';
+import VehiclesList from '../../components/UX/VehiclesList';
 
 function Vehicles({navigation, route}) {
 

@@ -1,8 +1,8 @@
 import MapView, { Marker } from "react-native-maps";
 import { StyleSheet, Alert } from 'react-native';
 import { useState, useLayoutEffect, useCallback } from "react";
-import IconButton from '../components/UI/IconButton';
-import { getReadableAddress } from "../util/location";
+
+import IconButton from '../../components/UI/IconButton';
 
 function Map({navigation, route}) {
 
