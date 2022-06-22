@@ -34,20 +34,22 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   label: {
-    color: 'white',
+    color: GlobalStyles.colors.primaryText,
+    fontWeight: 'bold',
     marginBottom: 4,
   },
   labelInvalid: {
-    color: GlobalStyles.colors.price,
+    color: GlobalStyles.colors.dangerText,
   },
   input: {
     paddingVertical: 8,
     paddingHorizontal: 6,
-    backgroundColor: GlobalStyles.colors.price,
+    backgroundColor: 'white',
     borderRadius: 4,
     fontSize: 16,
   },
   inputInvalid: {
-    backgroundColor: GlobalStyles.colors.price,
+    borderWidth: 1,
+    borderColor: GlobalStyles.colors.dangerText,
   },
 });

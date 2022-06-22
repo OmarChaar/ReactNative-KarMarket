@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: GlobalStyles.colors.price,
+    color: GlobalStyles.colors.button,
+    fontWeight: 'bold',
+    fontSize: GlobalStyles.fontSize.small
   },
 });

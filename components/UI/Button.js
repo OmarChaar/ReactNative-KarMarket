@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     text: {
         color: GlobalStyles.colors.buttonText,
         marginLeft: 5,
-        fontSize: GlobalStyles.fontSize.large
+        fontSize: GlobalStyles.fontSize.medium
     },
     pressed: {
         opacity: 0.75,
