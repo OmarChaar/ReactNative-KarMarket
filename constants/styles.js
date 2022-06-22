@@ -4,17 +4,19 @@ export const GlobalStyles = {
         header: '#acb1bf',
         headerText: '#000000',
         primaryText: '#38465d',
-        secondaryText: '#827dcb',
+        secondaryText: '#5e769c',
         dangerText: '#d74949',
         successText: '#00af20',
         inputBackground: '#4ac5ce',
         button: '#3623c7',
+        buttonText: '#acb1bf',
         price: '#d74949'
     },
     fontSize: {
         xlarge: 30,
         large: 24,
         medium: 20,
-        small: 16
+        small: 16,
+        xsmall: 14
     }
 }

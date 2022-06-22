@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     text: {
-        color: GlobalStyles.colors.primaryText,
+        color: GlobalStyles.colors.buttonText,
         marginLeft: 5,
-        fontSize: 14
+        fontSize: GlobalStyles.fontSize.large
     },
     pressed: {
         opacity: 0.75,
