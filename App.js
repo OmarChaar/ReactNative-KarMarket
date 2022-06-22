@@ -5,15 +5,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Settings from './screens/Tabs/Settings';
-import Dealerships from './screens/Dealerships';
-import AddPlace from './screens/AddPlace';
+import Dealerships from './screens/Stacks/Dealerships';
+import AddPlace from './screens/Stacks/AddPlace';
 import { GlobalStyles } from './constants/styles';
-import Map from './screens/Map';
+import Map from './screens/Stacks/Map';
 import { useEffect, useState, useContext } from 'react';
-import DealershipDetails from './screens/DealershipDetails';
+import DealershipDetails from './screens/Stacks/DealershipDetails';
 import Home from './screens/Tabs/Home';
-import Vehicles from './screens/Vehicles';
-import VehicleDetails from './screens/VehicleDetails';
+import Vehicles from './screens/Stacks/Vehicles';
+import VehicleDetails from './screens/Stacks/VehicleDetails';
 import { Ionicons } from '@expo/vector-icons'; 
 import LoginScreen from './screens/Auth/LoginScreen';
 import SignupScreen from './screens/Auth/SignupScreen';
@@ -106,14 +106,14 @@ function BottomTabNavigation() {
       screenOptions={{
         tabBarActiveTintColor: GlobalStyles.colors.prompt,
         tabBarLabelStyle: { fontSize: GlobalStyles.fontSize.xsmall },
-        headerShown: false
       }}
     >
       <BottomTab.Screen 
-        name="Home" 
+        name="Overview" 
         component={AuthenticatedStack} 
         options={{
           tabBarIcon: ({size, color}) => <Ionicons name="home" size={size} color={color} />,
+          headerShown: false,
         }}
       />
       <BottomTab.Screen 
@@ -122,6 +122,9 @@ function BottomTabNavigation() {
         options={{
           headerTitleAlign: 'center',
           title: 'Settings',
+          headerStyle: {
+            backgroundColor: GlobalStyles.colors.header,
+          },
           tabBarIcon: ({size, color}) => <Ionicons name="settings" size={size} color={color} />,
           headerRight: ({tintColor}) => (
             <IconButton 

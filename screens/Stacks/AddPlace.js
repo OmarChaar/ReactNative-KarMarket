@@ -1,7 +1,7 @@
 import { useCallback, useLayoutEffect, useState } from 'react';
 
-import AddPlaceForm from "../components/UX/AddPlaceForm";
-import { insert } from '../util/database';
+import AddPlaceForm from "../../components/UX/AddPlaceForm";
+import { insert } from '../../util/database';
 
 function AddPlace({navigation}) {
  
