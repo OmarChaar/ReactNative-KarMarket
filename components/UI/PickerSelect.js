@@ -24,7 +24,7 @@ const pickerSelectStyles = StyleSheet.create({
       borderWidth: 1,
       borderColor: GlobalStyles.colors.primaryText,
       backgroundColor: 'white',
-      borderRadius: 4,
+      borderRadius: 6,
       color: GlobalStyles.colors.secondaryText,
       textAlign: 'center',
       width: '100%',

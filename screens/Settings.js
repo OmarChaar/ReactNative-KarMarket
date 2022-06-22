@@ -61,9 +61,8 @@ function Settings() {
             <View style={GlobalStyles.settingsRow}>
                 <IconLabel label="notifications" icon="notifications"/>
                 <Switch
-                   trackColor={{ false: "#767577", true: "#81b0ff" }}
-                   thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-                   ios_backgroundColor="#3e3e3e"
+                   trackColor={{ true: GlobalStyles.colors.toggleActive }}
+                   ios_backgroundColor={GlobalStyles.colors.toggleBackground}
                    onValueChange={toggleSwitch}
                    value={isEnabled}
                 />

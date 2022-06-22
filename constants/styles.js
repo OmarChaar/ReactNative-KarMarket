@@ -10,10 +10,14 @@ export const GlobalStyles = {
         inputBackground: '#4ac5ce',
         button: '#3623c7',
         buttonText: '#acb1bf',
-        price: '#d74949',
-        prompt: '#3f76d5'
+        price: '#3f76d5',
+        prompt: '#3f76d5',
+        toggleInactive: '#3f76d5',
+        toggleActive: '#3f76d5',
+        toggleBackground: '#3e3e3e',
     },
     fontSize: {
+        xxlarge: 40,
         xlarge: 30,
         large: 24,
         medium: 20,
