@@ -1,8 +1,9 @@
-import { StyleSheet, View, Text, Image, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Switch } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 import Dropdown from '../components/UX/Settings/Dropdown';
 import PickerSelect from '../components/UI/PickerSelect';
 import { useState } from 'react';
+import IconLabel from '../components/UI/IconLabel';
 
 function Settings() {
 
@@ -29,6 +30,9 @@ function Settings() {
         setLanguageChosen(value);
     }
 
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Modify your settings for optimal experience!</Text>
@@ -37,7 +41,7 @@ function Settings() {
                 label="measurement"
             >
                 <PickerSelect 
-                    placeholder="..." 
+                    placeholder="Select" 
                     items={measurement} 
                     onChange={onChangeMeasurement}
                 />
@@ -48,11 +52,22 @@ function Settings() {
                 label="language"
             >
                 <PickerSelect 
-                    placeholder="..." 
+                    placeholder="Select" 
                     items={localization} 
                     onChange={onChangeLocalization}
                 />
             </Dropdown>
+
+            <View style={GlobalStyles.settingsRow}>
+                <IconLabel label="notifications" icon="notifications"/>
+                <Switch
+                   trackColor={{ false: "#767577", true: "#81b0ff" }}
+                   thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                   ios_backgroundColor="#3e3e3e"
+                   onValueChange={toggleSwitch}
+                   value={isEnabled}
+                />
+            </View>
 
         </View>
     )
@@ -66,8 +81,9 @@ const styles = StyleSheet.create({
         padding: 24
     },
     title: {
-        fontSize: GlobalStyles.fontSize.small,
+        fontSize: GlobalStyles.fontSize.xsmall,
         fontWeight: 'bold',
-        marginBottom: 24
+        marginBottom: 24,
+        color: GlobalStyles.colors.prompt
     },
 });

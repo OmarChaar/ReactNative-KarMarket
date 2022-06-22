@@ -10,7 +10,8 @@ export const GlobalStyles = {
         inputBackground: '#4ac5ce',
         button: '#3623c7',
         buttonText: '#acb1bf',
-        price: '#d74949'
+        price: '#d74949',
+        prompt: '#3f76d5'
     },
     fontSize: {
         xlarge: 30,
@@ -18,5 +19,11 @@ export const GlobalStyles = {
         medium: 20,
         small: 16,
         xsmall: 14
+    },
+    settingsRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginVertical: 12
     }
 }
