@@ -1,6 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import Button from "../components/UI/Button";
-import HomeCard from "../components/UX/HomeCard";
+import HomeCard from "../../components/UX/HomeCard";
 
 
 function Home({navigation}) {

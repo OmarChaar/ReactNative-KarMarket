@@ -4,14 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Settings from './screens/Settings';
+import Settings from './screens/Tabs/Settings';
 import Dealerships from './screens/Dealerships';
 import AddPlace from './screens/AddPlace';
 import { GlobalStyles } from './constants/styles';
 import Map from './screens/Map';
 import { useEffect, useState } from 'react';
 import DealershipDetails from './screens/DealershipDetails';
-import Home from './screens/Home';
+import Home from './screens/Tabs/Home';
 import Vehicles from './screens/Vehicles';
 import VehicleDetails from './screens/VehicleDetails';
 import { Ionicons } from '@expo/vector-icons'; 

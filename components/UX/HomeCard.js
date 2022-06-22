@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     },
     imageBackground: {
         flex: 1,
-      
         opacity: 0.5
     },  
     labelContainer: {
@@ -55,6 +54,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 24,
         color: GlobalStyles.colors.headerText,
+        textTransform: 'uppercase'
     },
     pressed: {
         opacity: 0.75,
