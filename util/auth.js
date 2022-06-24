@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { addUser } from './firebase';
 
 const API_KEY = 'AIzaSyAQ5BHmb9EEM9LcX62Jr6QFJrjcTDXmVVs';
 
@@ -13,8 +14,37 @@ async function authenticate(mode, email, password) {
 
     const token = response.data.idToken;
 
+    if(mode == 'signUp') {
+        const userData = await setAccountInfo(token);
+        await addUser(userData.uid, userData.email);
+    }
+
     return token;
 }
+
+async function setAccountInfo(idToken) {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`;
+
+    const response = await axios.post(url, {
+        idToken: idToken
+    });
+
+    const uid = response.data.users[0].localId;
+    const email = response.data.users[0].email;
+
+    console.log("response.data.users[0]", response.data.users[0]);
+    console.log("UID", uid);
+    console.log("EMAIL", email);
+    return {uid: uid, email: email};
+}
+
+// export function getUserAccount(idToken) {
+//     return getAccountInfo(idToken);
+// }
+
+// export function setUserAccount(idToken) {
+//     return setAccountInfo(idToken);
+// }
 
 export function createUser(email, password) {
    return authenticate('signUp', email, password);

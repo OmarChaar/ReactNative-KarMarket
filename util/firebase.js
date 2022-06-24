@@ -158,3 +158,12 @@ export async function fetchDealershipVehicles(id) {
     
     return vehicles;
 }
+
+export async function addUser(uid, email) {
+    await axios.post(ROOT_URL + "/addUser/", {
+        uid: uid,
+        email: email
+    });
+
+    return;
+}
