@@ -21,7 +21,7 @@ import AuthContextProvider, { AuthContext } from './store/auth-context';
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import IconButton from './components/UI/IconButton';
-import { getUserAccount, setUserAccount } from './util/auth';
+import { getUser, getUserAccount, setUserAccount } from './util/auth';
 
 
 const Stack = createNativeStackNavigator();
@@ -165,7 +165,8 @@ function Root() {
 
       if(storedToken) {
         authCtx.authenticate(storedToken);
-        // getUserAccount(storedToken);
+        const user = await getUser(storedToken);
+        console.log("__________user", user);
       }
 
       setIsTryingLogin(false);

@@ -167,3 +167,11 @@ export async function addUser(uid, email) {
 
     return;
 }
+
+export async function getUserData(uid) {
+    const response = await axios.post(ROOT_URL + "/addUser/", {
+        uid: uid
+    });
+
+    return response.data;
+}
