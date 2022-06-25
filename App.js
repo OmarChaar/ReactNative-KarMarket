@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,7 +10,7 @@ import Dealerships from './screens/Stacks/Dealerships';
 import AddPlace from './screens/Stacks/AddPlace';
 import { GlobalStyles } from './constants/styles';
 import Map from './screens/Stacks/Map';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import DealershipDetails from './screens/Stacks/DealershipDetails';
 import Home from './screens/Tabs/Home';
 import Vehicles from './screens/Stacks/Vehicles';
@@ -24,6 +24,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import IconButton from './components/UI/IconButton';
 import { getUser, getUserAccount, setUserAccount } from './util/auth';
 import * as SplashScreen from 'expo-splash-screen';
+import Entypo from '@expo/vector-icons/Entypo';
 
 
 const Stack = createNativeStackNavigator();
@@ -156,42 +157,74 @@ function Navigation() {
 }
 
 function Root() {
+  const [appIsReady, setAppIsReady] = useState(false);
+
   const [isTryingLogin, setIsTryingLogin] = useState(true);
   const authCtx = useContext(AuthContext);
 
   // Here we check if the user is already logged in.
   useEffect(() => {
-    async function fetchToken() {
- 
-      const storedToken = await AsyncStorage.getItem('token');
+    async function prepare() {
+      try {
+        async function fetchToken() {
+    
+          const storedToken = await AsyncStorage.getItem('token');
 
-      if(storedToken) {
-        authCtx.authenticate(storedToken);
-        // const user = await getUser(storedToken);
-        // authCtx.setUser(user);
+          if(storedToken) {
+            authCtx.authenticate(storedToken);
+            // const user = await getUser(storedToken);
+            // authCtx.setUser(user);
+          }
+
+          setIsTryingLogin(false);
+        }
+
+        async function fetchGuest() {
+          const storedIsGuest = await AsyncStorage.getItem('isGuest');
+          if(storedIsGuest == 'true') {
+            authCtx.setGuest(true);
+            setIsTryingLogin(false);
+          }
+        }
+
+        fetchGuest();
+
+        fetchToken();
+
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
       }
-
-      setIsTryingLogin(false);
     }
 
-    async function fetchGuest() {
-      const storedIsGuest = await AsyncStorage.getItem('isGuest');
-      if(storedIsGuest == 'true') {
-        authCtx.setGuest(true);
-        setIsTryingLogin(false);
-      }
-    }
-
-    fetchGuest();
-
-    fetchToken();
-
-  
+    prepare();
   }, []);
 
-  if(isTryingLogin) {
-    return <AppLoading />
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return (
+      <View
+      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+      onLayout={onLayoutRootView}>
+      <Text>SplashScreen Demo! 👋</Text>
+      <Entypo name="rocket" size={30} />
+    </View>
+    );
   }
+
+  // if(isTryingLogin) {
+  //   return <AppLoading />
+  // }
+
 
   return <Navigation />
 }
