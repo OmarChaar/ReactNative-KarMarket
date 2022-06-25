@@ -134,8 +134,7 @@ function BottomTabNavigation() {
               size={24} 
               onPress={authCtx.logout} 
             />
-          )
-               
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -162,11 +161,12 @@ function Root() {
   useEffect(() => {
     async function fetchToken() {
       const storedToken = await AsyncStorage.getItem('token');
+      // console.log("storedToken", storedToken);
 
       if(storedToken) {
         authCtx.authenticate(storedToken);
-        const user = await getUser(storedToken);
-        authCtx.setUser(user);
+        // const user = await getUser(storedToken);
+        // authCtx.setUser(user);
       }
 
       setIsTryingLogin(false);

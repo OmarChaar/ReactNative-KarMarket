@@ -1,8 +1,15 @@
+import { useState } from 'react';
 import { StyleSheet, View, Text, Image, Pressable, Dimensions } from 'react-native';
 import { GlobalStyles } from '../../constants/styles'
 import { formatPrice } from '../../util/format';
 
 function VehicleCard({vehicle, onSelect}) {
+
+    const [onLoadImage, setLoadImage] = useState(false);
+
+    const imageLoading = () => {
+        setLoadImage(true);
+    }
 
     return (
         <Pressable  
@@ -10,7 +17,11 @@ function VehicleCard({vehicle, onSelect}) {
             style={({pressed}) => [styles.container, pressed && styles.pressed]} 
             onPress={onSelect.bind(this, vehicle.id)}
         >
-            <Image style={styles.image} source={{uri: vehicle.images.front}}/>
+            <Image 
+                style={styles.image} 
+                source={onLoadImage ? {uri: vehicle.images.front} : require('../../assets/imgs/default-loading-image.png')}
+                onLoad={() => imageLoading()}
+            />
             <View style={styles.details}>
                 <View style={styles.topDetails}>
                     <View style={styles.vehicleName}>

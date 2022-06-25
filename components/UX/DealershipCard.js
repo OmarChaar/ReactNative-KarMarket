@@ -1,7 +1,14 @@
+import { useState } from 'react';
 import { StyleSheet, View, Text, Image, Pressable } from 'react-native';
 import { GlobalStyles } from '../../constants/styles'
 
 function DealershipCard({dealership, onSelect}) {
+
+    const [onLoadImage, setLoadImage] = useState(false);
+
+    const imageLoading = () => {
+        setLoadImage(true);
+    }
 
     return (
         <Pressable  
@@ -9,7 +16,11 @@ function DealershipCard({dealership, onSelect}) {
             style={({pressed}) => [styles.container, pressed && styles.pressed]} 
             onPress={onSelect.bind(this, dealership.id)}
         >
-            <Image style={styles.image} source={{uri: dealership.images[0]}}/>
+            <Image 
+                style={styles.image} 
+                source={onLoadImage ? {uri: dealership.images[0]} : require('../../assets/imgs/default-loading-image.png')}
+                onLoad={() => imageLoading()}
+            />
             <View style={styles.details}>
                 <Text style={styles.title}>{dealership.name}</Text>
                 <Text style={styles.address}>{dealership.address}</Text>

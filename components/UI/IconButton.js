@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     button: {
         padding: 8,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginRight: 5
     },
     pressed: {
         opacity: 0.75,
