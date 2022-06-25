@@ -1,14 +1,19 @@
 import { StyleSheet, View, Text, Switch } from 'react-native';
 import Dropdown from '../../components/UX/Settings/Dropdown';
 import PickerSelect from '../../components/UI/PickerSelect';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import IconLabel from '../../components/UI/IconLabel';
 import { GlobalStyles } from '../../constants/styles';
+import { AuthContext } from '../../store/auth-context';
 
 function Settings() {
 
     const [languageChosen, setLanguageChosen] = useState('');
     const [measurementChosen, setMeasurementChosen] = useState('');
+
+    const authCtx = useContext(AuthContext);
+    const user = authCtx.user
+    console.log("USER", user);
 
     const localization = [
         { label: 'English', value: 'en' },
@@ -36,6 +41,7 @@ function Settings() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Modify your settings for optimal experience!</Text>
+            {/* <Text style={styles.title}>{user.email}</Text> */}
             <Dropdown 
                 icon="speedometer-outline"
                 label="measurement"

@@ -166,7 +166,7 @@ function Root() {
       if(storedToken) {
         authCtx.authenticate(storedToken);
         const user = await getUser(storedToken);
-        console.log("__________user", user);
+        authCtx.setUser(user);
       }
 
       setIsTryingLogin(false);
