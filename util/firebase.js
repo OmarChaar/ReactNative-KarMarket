@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Vehicle from '../models/vehicle';
 import Dealership from '../models/dealership';
+import User from '../models/user';
 
 const ROOT_URL = 'https://us-central1-karmarket-352901.cloudfunctions.net';
 
@@ -169,9 +170,20 @@ export async function addUser(uid, email) {
 }
 
 export async function getUserData(uid) {
-    const response = await axios.post(ROOT_URL + "/addUser/", {
+    const response = await axios.post(ROOT_URL + "/getUser/", {
         uid: uid
     });
 
-    return response.data;
+    const result = response.data;
+
+    const user = new User(
+        result.uid,
+        result.email,
+        result.displayName,
+        (result.measurements ? result.measurements : 'KM'),
+        (result.language ? result.language : 'en'),
+        (result.notifications ? result.notifications : true)
+    )
+
+    return user;
 }
