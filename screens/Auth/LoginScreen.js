@@ -28,7 +28,7 @@ function LoginScreen() {
   }
 
   async function continueAsGuest() {
-    authCtx.setGuest();
+    authCtx.setGuest(true);
   }
 
   if(isAuthenticating) {

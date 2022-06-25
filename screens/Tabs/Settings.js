@@ -9,6 +9,10 @@ import Button from '../../components/UI/Button';
 
 function Settings() {
 
+    function loginHandler() {
+        authCtx.setGuest(false);
+    }
+
     const [languageChosen, setLanguageChosen] = useState('');
     const [measurementChosen, setMeasurementChosen] = useState('');
 
@@ -76,7 +80,7 @@ function Settings() {
 
             {authCtx.isGuest &&
                <View style={styles.loginContaier}>
-                    <Button>Login or Signup</Button>
+                    <Button onPress={loginHandler}>Login or Signup</Button>
                 </View>
             }
           

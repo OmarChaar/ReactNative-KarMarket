@@ -25,9 +25,9 @@ function AuthContextProvider({ children }) {
         AsyncStorage.setItem('token', token);
     }
 
-    function setGuest() {
-        setGuestHandler(true);
-        AsyncStorage.setItem('isGuest', 'true');
+    function setGuest(guest) {
+        setGuestHandler(guest);
+        AsyncStorage.setItem('isGuest', guest+'');
     }
 
     function setUser(user) {

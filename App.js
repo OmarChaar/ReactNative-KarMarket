@@ -177,7 +177,7 @@ function Root() {
     async function fetchGuest() {
       const storedIsGuest = await AsyncStorage.getItem('isGuest');
       if(storedIsGuest == 'true') {
-        authCtx.setGuest();
+        authCtx.setGuest(true);
         setIsTryingLogin(false);
       }
     }
