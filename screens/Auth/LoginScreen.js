@@ -27,11 +27,15 @@ function LoginScreen() {
     }
   }
 
+  async function continueAsGuest() {
+    authCtx.setGuest();
+  }
+
   if(isAuthenticating) {
     return <LoadingOverlay message="Logging you in..." />
   }
 
-  return <AuthContent isLogin onAuthenticate={lginHandler} />;
+  return <AuthContent isLogin continueAsGuest={continueAsGuest} onAuthenticate={lginHandler} />;
 }
 
 export default LoginScreen;

@@ -3,6 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler';
 
 import Settings from './screens/Tabs/Settings';
 import Dealerships from './screens/Stacks/Dealerships';
@@ -22,6 +23,7 @@ import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import IconButton from './components/UI/IconButton';
 import { getUser, getUserAccount, setUserAccount } from './util/auth';
+import * as SplashScreen from 'expo-splash-screen';
 
 
 const Stack = createNativeStackNavigator();
@@ -127,7 +129,7 @@ function BottomTabNavigation() {
             backgroundColor: GlobalStyles.colors.header,
           },
           tabBarIcon: ({size, color}) => <Ionicons name="settings" size={size} color={color} />,
-          headerRight: ({tintColor}) => (
+          headerRight: ({tintColor}) => ( authCtx.isAuthenticated &&
             <IconButton 
               name="exit" 
               color={tintColor} 
@@ -147,8 +149,8 @@ function Navigation() {
 
   return (
     <NavigationContainer>
-      {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <BottomTabNavigation />}
+      {(!authCtx.isAuthenticated && !authCtx.isGuest) && <AuthStack />}
+      {(authCtx.isAuthenticated || authCtx.isGuest) && <BottomTabNavigation />}
     </NavigationContainer>
   );
 }
@@ -160,8 +162,8 @@ function Root() {
   // Here we check if the user is already logged in.
   useEffect(() => {
     async function fetchToken() {
+ 
       const storedToken = await AsyncStorage.getItem('token');
-      // console.log("storedToken", storedToken);
 
       if(storedToken) {
         authCtx.authenticate(storedToken);
@@ -171,7 +173,20 @@ function Root() {
 
       setIsTryingLogin(false);
     }
+
+    async function fetchGuest() {
+      const storedIsGuest = await AsyncStorage.getItem('isGuest');
+      if(storedIsGuest == 'true') {
+        authCtx.setGuest();
+        setIsTryingLogin(false);
+      }
+    }
+
+    fetchGuest();
+
     fetchToken();
+
+  
   }, []);
 
   if(isTryingLogin) {

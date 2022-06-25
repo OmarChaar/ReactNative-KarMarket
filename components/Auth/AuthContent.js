@@ -5,7 +5,7 @@ import FlatButton from '../UI/FlatButton';
 import AuthForm from './AuthForm';
 import { GlobalStyles } from '../../constants/styles';
 
-function AuthContent({ isLogin, onAuthenticate }) {
+function AuthContent({ isLogin, onAuthenticate, continueAsGuest }) {
 
   const navigate = useNavigation();
 
@@ -54,6 +54,10 @@ function AuthContent({ isLogin, onAuthenticate }) {
     onAuthenticate({ email, password });
   }
 
+  function guestHandler() {
+    continueAsGuest();
+  }
+
   return (
     <View style={styles.authContent}>
       <AuthForm
@@ -64,6 +68,13 @@ function AuthContent({ isLogin, onAuthenticate }) {
       <View style={styles.buttons}>
         <FlatButton onPress={switchAuthModeHandler}>
           {isLogin ? 'Create a new user' : 'Log in instead'}
+        </FlatButton>
+
+        <FlatButton 
+          style={{color: GlobalStyles.colors.prompt}}
+          onPress={guestHandler}
+        >
+          Continue as guest
         </FlatButton>
       </View>
     </View>

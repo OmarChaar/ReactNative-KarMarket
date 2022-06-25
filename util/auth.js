@@ -29,8 +29,6 @@ async function getAccountInfo(idToken) {
         idToken: idToken
     });
 
-    console.log("response", response);
-
     const uid = response.data.users[0].localId;
     const email = response.data.users[0].email;
 
@@ -39,7 +37,7 @@ async function getAccountInfo(idToken) {
 
 export async function getUser(idToken) {
     const userData = await getAccountInfo(idToken);
-    console.log("userData", userData)
+
     return getUserData(userData.uid);
 }
 

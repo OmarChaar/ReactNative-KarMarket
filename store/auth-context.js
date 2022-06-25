@@ -5,14 +5,17 @@ export const AuthContext = createContext({
     token: '',
     isAuthenticated: false,
     user: null,
+    isGuest: false,
     setUser: () => {},
     authenticate: () => {},
-    logout: () => {}
+    logout: () => {},
+    setGuest: () => {}
 });
 
 function AuthContextProvider({ children }) {
 
     const [authToken, setAuthToken] = useState();
+    const [guest, setGuestHandler] = useState(false);
     const [userProfile, setUserHandler] = useState();
 
     function authenticate(token) {
@@ -22,6 +25,11 @@ function AuthContextProvider({ children }) {
         AsyncStorage.setItem('token', token);
     }
 
+    function setGuest() {
+        setGuestHandler(true);
+        AsyncStorage.setItem('isGuest', 'true');
+    }
+
     function setUser(user) {
         setUserHandler(user);
     }
@@ -29,16 +37,17 @@ function AuthContextProvider({ children }) {
     function logout() {
         setAuthToken(null);
         AsyncStorage.removeItem('token');
-
     }
 
     const value = {
         token: authToken,
         isAuthenticated: !!authToken,
         user: userProfile,
+        isGuest: guest,
         setUser: setUser,
         authenticate: authenticate,
-        logout: logout
+        logout: logout,
+        setGuest: setGuest
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

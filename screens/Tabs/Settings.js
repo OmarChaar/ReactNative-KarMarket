@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import IconLabel from '../../components/UI/IconLabel';
 import { GlobalStyles } from '../../constants/styles';
 import { AuthContext } from '../../store/auth-context';
+import Button from '../../components/UI/Button';
 
 function Settings() {
 
@@ -13,7 +14,6 @@ function Settings() {
 
     const authCtx = useContext(AuthContext);
     const user = authCtx.user
-    console.log("USER", user);
 
     const localization = [
         { label: 'English', value: 'en' },
@@ -74,6 +74,12 @@ function Settings() {
                 />
             </View>
 
+            {authCtx.isGuest &&
+               <View style={styles.loginContaier}>
+                    <Button>Login or Signup</Button>
+                </View>
+            }
+          
         </View>
     )
 }
@@ -91,4 +97,9 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         color: GlobalStyles.colors.prompt
     },
+    loginContaier: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        // backgroundColor: 'red'
+    }
 });
