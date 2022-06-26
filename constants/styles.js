@@ -15,6 +15,7 @@ export const GlobalStyles = {
         toggleInactive: '#3f76d5',
         toggleActive: '#3f76d5',
         toggleBackground: '#3e3e3e',
+        inactiveInput: '#d7d7d7c0'
     },
     fontSize: {
         xxlarge: 40,

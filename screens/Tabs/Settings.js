@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Switch } from 'react-native';
+import { StyleSheet, View, Text, Switch, TextInput } from 'react-native';
 import Dropdown from '../../components/UX/Settings/Dropdown';
 import PickerSelect from '../../components/UI/PickerSelect';
 import { useContext, useState } from 'react';
@@ -6,6 +6,7 @@ import IconLabel from '../../components/UI/IconLabel';
 import { GlobalStyles } from '../../constants/styles';
 import { AuthContext } from '../../store/auth-context';
 import Button from '../../components/UI/Button';
+import Input from '../../components/UX/Settings/Input';
 
 function Settings() {
 
@@ -44,39 +45,59 @@ function Settings() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Modify your settings for optimal experience!</Text>
-            {/* <Text style={styles.title}>{user.email}</Text> */}
-            <Dropdown 
-                icon="speedometer-outline"
-                label="measurement"
-            >
-                <PickerSelect 
-                    placeholder="Select" 
-                    items={measurement} 
-                    onChange={onChangeMeasurement}
-                />
-            </Dropdown>
+            {!authCtx.isGuest &&
+                <View style={styles.profile}>
+                    <Text style={styles.title}>Your profile</Text>
 
-            <Dropdown 
-                icon="language"
-                label="language"
-            >
-                <PickerSelect 
-                    placeholder="Select" 
-                    items={localization} 
-                    onChange={onChangeLocalization}
-                />
-            </Dropdown>
+                    <Input
+                        label="email"
+                        editable={false}
+                        value="omar@nvrl8.com"
+                        
+                    />
 
-            <View style={GlobalStyles.settingsRow}>
-                <IconLabel label="notifications" icon="notifications"/>
-                <Switch
-                   trackColor={{ true: GlobalStyles.colors.toggleActive }}
-                   ios_backgroundColor={GlobalStyles.colors.toggleBackground}
-                   onValueChange={toggleSwitch}
-                   value={isEnabled}
-                />
+                    <Input
+                        label="name"
+                        placeholder="Enter a display name"
+                    />
+                </View>
+            }
+            <View>
+                <Text style={styles.title}>Modify your settings for optimal experience!</Text>
+                {/* <Text style={styles.title}>{user.email}</Text> */}
+                <Dropdown 
+                    icon="speedometer-outline"
+                    label="measurement"
+                >
+                    <PickerSelect 
+                        placeholder="Select" 
+                        items={measurement} 
+                        onChange={onChangeMeasurement}
+                    />
+                </Dropdown>
+
+                <Dropdown 
+                    icon="language"
+                    label="language"
+                >
+                    <PickerSelect 
+                        placeholder="Select" 
+                        items={localization} 
+                        onChange={onChangeLocalization}
+                    />
+                </Dropdown>
+
+                <View style={GlobalStyles.settingsRow}>
+                    <IconLabel label="notifications" icon="notifications"/>
+                    <Switch
+                    trackColor={{ true: GlobalStyles.colors.toggleActive }}
+                    ios_backgroundColor={GlobalStyles.colors.toggleBackground}
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                    />
+                </View>
             </View>
+            
 
             {authCtx.isGuest &&
                <View style={styles.loginContaier}>
@@ -95,10 +116,13 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 24
     },
+    profile: {
+        marginBottom: 24,
+    },
     title: {
         fontSize: GlobalStyles.fontSize.xsmall,
         fontWeight: 'bold',
-        marginBottom: 24,
+        marginBottom: 12,
         color: GlobalStyles.colors.prompt
     },
     loginContaier: {

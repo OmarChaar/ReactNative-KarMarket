@@ -5,8 +5,8 @@ import HomeCard from "../../components/UX/HomeCard";
 function Home({navigation}) {
     return (
         <View style={styles.container}>
-            <HomeCard type="dealership" label="Dealerships" onPress={() => navigation.navigate('Dealerships')}/>
-            <HomeCard type="car" label="Cars" onPress={() => navigation.navigate('Vehicles')}/>
+            <HomeCard source={require('../../assets/imgs/homepage/homepage_dealership.png')} label="" onPress={() => navigation.navigate('Dealerships')}/>
+            <HomeCard source={require('../../assets/imgs/homepage/homepage_allcars.png')} label="" onPress={() => navigation.navigate('Vehicles')}/>
         </View>
     )
 }
@@ -16,6 +16,7 @@ export default Home;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 24
+        padding: 24,
+        flexDirection: 'row',
     }
 })

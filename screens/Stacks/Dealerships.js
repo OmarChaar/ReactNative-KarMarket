@@ -9,18 +9,33 @@ import { fetchDealerships } from '../../util/firebase';
 import LoadingOverlay from '../../components/UI/LoadingOverlay';
 import ErrorOverlay from '../../components/UI/ErrorOverlay';
 import Search from '../../components/UI/Search';
+import { GlobalStyles } from '../../constants/styles';
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 function Dealerships({navigation}) {
+
+    const [isSearching, setIsSearching] = useState(false);
+
+    function isSearchingHandler() {
+        setIsSearching(!isSearching);
+    }
 
     useLayoutEffect(() => {
         navigation.setOptions({
             title: 'Dealerships',
             headerTitleAlign: 'left',
             headerRight: ({tintColor}) => (
-                <IconButton name="search" size={24} color={tintColor} onPress={() =>  {}} />
+                <MaterialIcons 
+                    name={!isSearching ? "search" : "search-off"} 
+                    size={24} 
+                    color={!isSearching ? tintColor : GlobalStyles.colors.dangerText} 
+                    onPress={isSearchingHandler} 
+                    style={{  padding: 8, marginRight: 5}}
+                />
             ),
         })
-    }, [navigation]);
+    }, [navigation, isSearching]);
 
     const isFocused = useIsFocused();
 
@@ -66,7 +81,10 @@ function Dealerships({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Search placeholder="Search Dealerships" onChangeText={onSearchDealership}/>
+            {isSearching && 
+                <Search placeholder="Search Dealerships" onChangeText={onSearchDealership}/>
+            }
+            
 
             <DealershipsList dealerships={loadedDealerships} />
         </View>

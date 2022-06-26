@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Pressable, Dimensions, ImageBackground } from '
 import { GlobalStyles } from '../../constants/styles';
 
 
-function HomeCard({label, type, onPress}) {
+function HomeCard({label, source, onPress}) {
     return (
         <View style={styles.container}>
             <Pressable 
@@ -11,7 +11,7 @@ function HomeCard({label, type, onPress}) {
                 style={({pressed}) => [styles.button, pressed && styles.pressed]}
             >
                 <ImageBackground
-                    source={type == 'dealership' ? require('../../assets/imgs/dealerships.jpeg') : require('../../assets/imgs/cars.jpeg')}
+                    source={source}//{type == 'dealership' ? require('../../assets/imgs/dealerships.jpeg') : require('../../assets/imgs/cars.jpeg')}
                     style={styles.imageBackground}
                 > 
                 </ImageBackground>
@@ -33,14 +33,21 @@ export default HomeCard;
 const styles = StyleSheet.create({
     container: {
         height: Dimensions.get('window').height / 5,
-        marginBottom: 24
+        width: '50%',
+        padding: 12,
+        borderRadius: 40
     },
     button: {
         flex: 1,
+        borderRadius: 40
     },
     imageBackground: {
-        flex: 1,
-        opacity: 0.5
+        // flex: 1,
+        borderRadius: 40,
+        width: '100%',
+        height: '100%',
+        resizeMode: 'center'
+        // opacity: 0.5
     },  
     labelContainer: {
         position: 'absolute',
