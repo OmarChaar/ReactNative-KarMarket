@@ -8,6 +8,7 @@ import IconButton from '../../components/UI/IconButton';
 import { fetchDealerships } from '../../util/firebase';
 import LoadingOverlay from '../../components/UI/LoadingOverlay';
 import ErrorOverlay from '../../components/UI/ErrorOverlay';
+import Search from '../../components/UI/Search';
 
 function Dealerships({navigation}) {
 
@@ -51,6 +52,10 @@ function Dealerships({navigation}) {
      
     }, [isFocused]);
 
+    function onSearchDealership(text) {
+        console.log(text);
+    }
+
     if(error && !isFetching) {
         return <ErrorOverlay message={error}/>
       }
@@ -61,6 +66,8 @@ function Dealerships({navigation}) {
 
     return (
         <View style={styles.container}>
+            <Search placeholder="Search Dealerships" onChangeText={onSearchDealership}/>
+
             <DealershipsList dealerships={loadedDealerships} />
         </View>
     )

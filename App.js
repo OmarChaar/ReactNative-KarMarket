@@ -25,6 +25,7 @@ import IconButton from './components/UI/IconButton';
 import { getUser, getUserAccount, setUserAccount } from './util/auth';
 import * as SplashScreen from 'expo-splash-screen';
 import Entypo from '@expo/vector-icons/Entypo';
+import LoadingOverlay from './components/UI/LoadingOverlay';
 
 
 const Stack = createNativeStackNavigator();
@@ -213,18 +214,12 @@ function Root() {
   if (!appIsReady) {
     return (
       <View
-      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-      onLayout={onLayoutRootView}>
-      <Text>SplashScreen Demo! 👋</Text>
-      <Entypo name="rocket" size={30} />
-    </View>
+        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        onLayout={onLayoutRootView}>
+          <LoadingOverlay message="Loading Content..."/>
+      </View>
     );
   }
-
-  // if(isTryingLogin) {
-  //   return <AppLoading />
-  // }
-
 
   return <Navigation />
 }
@@ -238,7 +233,6 @@ export default function App() {
         <Root />
       </AuthContextProvider>
     </>
- 
   );
 }
 
