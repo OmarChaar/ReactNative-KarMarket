@@ -9,13 +9,12 @@ function Search({placeholder, onChangeText, onClearPress}) {
                 placeholder={placeholder}
                 onChangeText={(text) => onChangeText(text)}
                 onClearPress={onClearPress}
-                on
                 placeholderTextColor={GlobalStyles.colors.header}
                 textInputStyle={{
                     color: GlobalStyles.colors.primaryText
                 }}
                 clearIconImageStyle={{
-                    tintColor: GlobalStyles.colors.primaryText
+                    tintColor: GlobalStyles.colors.primaryText,
                 }}
                 searchIconImageStyle={{
                     tintColor: GlobalStyles.colors.primaryText

@@ -10,6 +10,8 @@ import LoadingOverlay from '../../components/UI/LoadingOverlay';
 import ErrorOverlay from '../../components/UI/ErrorOverlay';
 import VehiclesList from '../../components/UX/VehiclesList';
 import { GlobalStyles } from '../../constants/styles';
+import IconButton from '../../components/UI/IconButton';
+
 
 function Vehicles({navigation, route}) {
 
@@ -17,11 +19,12 @@ function Vehicles({navigation, route}) {
 
     const [isSearching, setIsSearching] = useState(false);
 
-    function isSearchingHandler() {
-        setIsSearching(!isSearching);
-    }
-
     useLayoutEffect(() => {
+        function isSearchingHandler() {
+            setIsSearching(!isSearching);
+            // CLEAR SEARCH WHEN CLOSED
+        }
+
         navigation.setOptions({
             title: route.params ? route.params.dealership : 'Vehicles',
             headerTitleAlign: 'left',
@@ -92,18 +95,41 @@ function Vehicles({navigation, route}) {
         setLoadedVehicles(loadedVehiclesBackup);
     }
 
-
     if(error && !isFetching) {
         return <ErrorOverlay message={error}/>
-      }
+    }
     
-      if(isFetching) {
+    if(isFetching) {
         return <LoadingOverlay />
-      }
+    }
+
+    function filterHandler() {
+
+    }
+
+    function sortHandler() {
+
+    }
 
     return (
         <View style={styles.container}>
-             {isSearching && 
+            <View style={styles.filterContainer}>
+                <IconButton 
+                    name="options-outline" 
+                    size={28} 
+                    style={[styles.icons, styles.filter]}
+                    onPress={filterHandler}
+                />
+
+                <IconButton 
+                    name="filter" 
+                    size={28} 
+                    style={styles.icons}
+                    onPress={sortHandler}
+                />
+            </View>
+
+            {isSearching && 
                 <Search placeholder="Search Vehicles" onChangeText={onSearchVehicles} onClearPress={onClearVehicles}/>
             }
 
@@ -117,8 +143,22 @@ export default Vehicles;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 24,
+        paddingVertical: 12,
+        paddingHorizontal: 12,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    filterContainer: {
+        flexDirection: 'row',
+        marginBottom: 12,
+        justifyContent: 'space-between',
+        width: '100%',
+        alignItems: 'center'
+    },
+    icons: {
+        padding: 0,
+    },
+    filter: {
+        marginRight: 15
     }
 });
