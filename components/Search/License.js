@@ -6,7 +6,7 @@ function License({modalVisible, onCancel, onOk}) {
     return (
         <ModalSeach 
             modalVisible={modalVisible} 
-            title="License"
+            title="End of License"
             onCancel={onCancel}
             onOk={onOk}
         >

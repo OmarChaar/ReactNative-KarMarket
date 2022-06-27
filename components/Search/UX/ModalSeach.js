@@ -6,7 +6,7 @@ import FlatButton from "../../UI/FlatButton";
 function ModalSeach({children, modalVisible, title, onCancel, onOk}) {
   return (
     <Modal
-      animationType="slide"
+      animationType="fade"
       transparent={true}
       visible={modalVisible}
     >
@@ -91,6 +91,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'flex-end',
-    padding: 24,
+    padding: 12,
   }
 })

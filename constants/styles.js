@@ -31,5 +31,5 @@ export const GlobalStyles = {
         justifyContent: 'space-between',
         alignItems: 'center',
         marginVertical: 12
-    }
+    },
 }
