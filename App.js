@@ -26,7 +26,7 @@ import { getUser, getUserAccount, setUserAccount } from './util/auth';
 import * as SplashScreen from 'expo-splash-screen';
 import Entypo from '@expo/vector-icons/Entypo';
 import LoadingOverlay from './components/UI/LoadingOverlay';
-import AdvancedSearch from './screens/Stacks/AdvancedSearch';
+import AdvancedSearch from './screens/Tabs/AdvancedSearch';
 
 
 const Stack = createNativeStackNavigator();
@@ -99,13 +99,13 @@ function AuthenticatedStack() {
           title: 'Loading Vehicle...'
         }}
       />
-      <Stack.Screen 
+      {/* <Stack.Screen 
         name='Search'
         component={AdvancedSearch}
         options={{
           title: 'Advanced Search'
         }}
-      />
+      /> */}
     </Stack.Navigator>
   )
 
@@ -127,6 +127,16 @@ function BottomTabNavigation() {
         options={{
           tabBarIcon: ({size, color}) => <Ionicons name="home" size={size} color={color} />,
           headerShown: false,
+        }}
+      />
+      <BottomTab.Screen
+        name="Search"
+        component={AdvancedSearch}
+        options={{
+          tabBarIcon: ({size, color}) => <Ionicons name="triangle" size={size} color={color} />,
+          headerStyle: {
+            backgroundColor: GlobalStyles.colors.header,
+          },
         }}
       />
       <BottomTab.Screen 
