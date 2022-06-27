@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text } from "react-native";
-import { Ionicons, MaterialIcons, FontAwesome, MaterialCommunityIcons, Octicons } from '@expo/vector-icons'; 
+import { Ionicons, MaterialIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'; 
 
-import { GlobalStyles } from "../../constants/styles";
-import IconButton from "../UI/IconButton";
+import { GlobalStyles } from "../../../constants/styles";
+import IconButton from "../../UI/IconButton"
 
 function LabelPlus({icon, iconType, label, onPress}) {
     return (
