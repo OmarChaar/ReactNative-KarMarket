@@ -2,12 +2,14 @@ import { StyleSheet, View } from 'react-native';
 import SearchBar from "react-native-dynamic-search-bar";
 import { GlobalStyles } from '../../constants/styles';
 
-function Search({placeholder, onChangeText}) {
+function Search({placeholder, onChangeText, onClearPress}) {
     return (
         <View style={styles.container}>
             <SearchBar
                 placeholder={placeholder}
                 onChangeText={(text) => onChangeText(text)}
+                onClearPress={onClearPress}
+                on
                 placeholderTextColor={GlobalStyles.colors.header}
                 textInputStyle={{
                     color: GlobalStyles.colors.primaryText

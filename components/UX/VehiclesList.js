@@ -22,7 +22,14 @@ function VehiclesList({vehicles}) {
     }
 
    return (
-       <FlatList style={styles.list} data={vehicles} keyExtractor={(item) => item.id} renderItem={({item}) => <VehicleCard vehicle={item} onSelect={selectVehicleHandler}/>}/>
+        <FlatList 
+            style={styles.list} 
+            data={vehicles} keyExtractor={(item) => item.id} 
+            renderItem={({item}) => 
+                <VehicleCard vehicle={item} onSelect={selectVehicleHandler}/>
+            }
+            showsVerticalScrollIndicator={false}
+        /> 
    )
 }
 

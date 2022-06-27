@@ -4,7 +4,6 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
 import DealershipsList from '../../components/UX/DealershipsList';
-import IconButton from '../../components/UI/IconButton';
 import { fetchDealerships } from '../../util/firebase';
 import LoadingOverlay from '../../components/UI/LoadingOverlay';
 import ErrorOverlay from '../../components/UI/ErrorOverlay';
@@ -31,7 +30,7 @@ function Dealerships({navigation}) {
                     size={24} 
                     color={!isSearching ? tintColor : GlobalStyles.colors.dangerText} 
                     onPress={isSearchingHandler} 
-                    style={{  padding: 8, marginRight: 5}}
+                    style={{ padding: 8, marginRight: 5}}
                 />
             ),
         })
