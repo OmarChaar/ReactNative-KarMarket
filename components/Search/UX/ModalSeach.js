@@ -55,7 +55,9 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.modalBackground
   },
   modalView: {
-    height: '50%',
+    flexDirection: 'column',
+    minHeight: '15%',
+    maxHeight: '90%',
     width: '90%',
     backgroundColor: "white",
     borderRadius: 20,
@@ -69,8 +71,8 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   childrenView: {
-    flex: 1,
-    padding: 24,
+    height: 'auto',
+    padding: 12,
   },
   titleContainer: {
     backgroundColor: GlobalStyles.colors.header,

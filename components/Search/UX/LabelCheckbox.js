@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
        flexDirection: 'row',
        justifyContent: 'space-between',
        alignItems: 'center',
-       marginBottom: 24
+       marginVertical: 12
     },
     label: {
         fontSize: GlobalStyles.fontSize.small,
