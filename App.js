@@ -26,6 +26,7 @@ import { getUser, getUserAccount, setUserAccount } from './util/auth';
 import * as SplashScreen from 'expo-splash-screen';
 import Entypo from '@expo/vector-icons/Entypo';
 import LoadingOverlay from './components/UI/LoadingOverlay';
+import AdvancedSearch from './screens/Stacks/AdvancedSearch';
 
 
 const Stack = createNativeStackNavigator();
@@ -96,6 +97,13 @@ function AuthenticatedStack() {
         component={VehicleDetails}
         options={{
           title: 'Loading Vehicle...'
+        }}
+      />
+      <Stack.Screen 
+        name='Search'
+        component={AdvancedSearch}
+        options={{
+          title: 'Advanced Search'
         }}
       />
     </Stack.Navigator>

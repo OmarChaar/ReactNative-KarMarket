@@ -13,6 +13,7 @@ function HomeCard({label, source, onPress}) {
                 <ImageBackground
                     source={source}//{type == 'dealership' ? require('../../assets/imgs/dealerships.jpeg') : require('../../assets/imgs/cars.jpeg')}
                     style={styles.imageBackground}
+                    imageStyle={styles.image}
                 > 
                 </ImageBackground>
                 
@@ -35,20 +36,21 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height / 5,
         width: '50%',
         padding: 12,
-        borderRadius: 40
+        borderRadius: 6,
     },
     button: {
         flex: 1,
-        borderRadius: 40
+        borderRadius: 6
     },
     imageBackground: {
-        // flex: 1,
-        borderRadius: 40,
         width: '100%',
         height: '100%',
-        resizeMode: 'center'
-        // opacity: 0.5
+        borderRadius: 6
     },  
+    image: {
+        resizeMode: 'contain',
+        borderRadius: 6
+    },
     labelContainer: {
         position: 'absolute',
         justifyContent: 'center',
