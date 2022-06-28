@@ -1,10 +1,14 @@
+import { useEffect, useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { SearchContext } from "../../store/search-context";
 import LabelCheckbox from "./UX/LabelCheckbox";
 
 import ModalSeach from "./UX/ModalSeach";
 import RangePicker from "./UX/RangePicker";
 
 function KM({modalVisible, onCancel, onOk}) {
+
+    const searchCtx = useContext(SearchContext);
 
     const KMMinimum = [
         {label: '0 KM', value: 0}, 
@@ -37,30 +41,58 @@ function KM({modalVisible, onCancel, onOk}) {
         {label: '1,000,000 KM', value: 1000000}
     ]
 
+    const [newKM, setNewKM] = useState(true);
+    const [usedKM, setUsedKM] = useState(true);
+
+    const [minKM, setMinKM] = useState();
+    const [maxKM, setMaxKM] = useState();
+
+    useEffect(() => {
+        console.log("MIN", minKM);
+        console.log("MAX", maxKM);
+    }, [minKM, maxKM]);
+
+    function setMinHandler(value) {
+        setMinKM(value);
+    }
+
+    function setMaxHandler(value) {
+        setMaxKM(value);
+    }
+
+    function onOkHandler() {
+        searchCtx.setKM({min: minKM, max: maxKM});
+        onOk();
+    }
+
     return (
         <ModalSeach 
             modalVisible={modalVisible} 
             title="KM"
             onCancel={onCancel}
-            onOk={onOk}
+            onOk={onOkHandler}
         >
             <View style={styles.container}>
-                <LabelCheckbox label="All"/>
-                <LabelCheckbox label="New"/>
-                <LabelCheckbox label="Used"/>
+                <LabelCheckbox label="New" isChecked={newKM} onCheck={() => setNewKM(!newKM)}/>
+                <LabelCheckbox label="Used" isChecked={usedKM} onCheck={() => setUsedKM(!usedKM)}/>
 
-                <RangePicker
-                    label="KM Minimum"
-                    data={KMMinimum}
-                    placeholder="Select Minimum"
-                />
+                {usedKM && 
+                    <>
+                        <RangePicker
+                            label="KM Minimum"
+                            data={KMMinimum}
+                            placeholder="Select Minimum"
+                            onValueChange={setMinHandler}
+                        />
 
-                <RangePicker
-                    label="KM Maximum"
-                    data={KMMaximum}
-                    placeholder="Select Maximum"
-                />
-                
+                        <RangePicker
+                            label="KM Maximum"
+                            data={KMMaximum}
+                            placeholder="Select Maximum"
+                            onValueChange={setMaxHandler}
+                        />
+                    </>
+                }
             </View>
         </ModalSeach>
     )

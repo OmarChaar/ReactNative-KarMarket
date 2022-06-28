@@ -27,6 +27,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import Entypo from '@expo/vector-icons/Entypo';
 import LoadingOverlay from './components/UI/LoadingOverlay';
 import AdvancedSearch from './screens/Tabs/AdvancedSearch';
+import SearchContextProvider, { SearchContext } from './store/search-context';
 
 
 const Stack = createNativeStackNavigator();
@@ -248,7 +249,9 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <AuthContextProvider>
-        <Root />
+        <SearchContextProvider>
+          <Root />
+        </SearchContextProvider>
       </AuthContextProvider>
     </>
   );

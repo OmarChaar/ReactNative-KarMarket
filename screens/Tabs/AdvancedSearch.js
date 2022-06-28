@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import KM from "../../components/Search/KM";
 import Price from "../../components/Search/Price";
@@ -17,10 +17,20 @@ import LabelPlus from "../../components/Search/UX/LabelPlus";
 import Button from "../../components/UI/Button";
 import FlatButton from "../../components/UI/FlatButton";
 import { GlobalStyles } from "../../constants/styles";
+import { SearchContext } from "../../store/search-context";
 
 function AdvancedSearch() {
 
+    const searchCtx = useContext(SearchContext);
+
     const [modalKM, setModalKM] = useState(false);
+    const [KMFilter, setKMFilter] = useState();
+    function KMFilterHandler() {
+        const min = searchCtx.KM.min ? 'from ' + searchCtx.KM.min.toLocaleString() : '';
+        const max = searchCtx.KM.max ? ' to ' + searchCtx.KM.max.toLocaleString() : '';
+        setKMFilter(min +  max);
+        setModalKM(!modalKM);
+    }
     function KMHandler() {
         setModalKM(true);
     }
@@ -85,16 +95,21 @@ function AdvancedSearch() {
         setModalEndLicense(true);
     }
 
+    useEffect(() => {
+        console.log("KMFilter", KMFilter);
+    }, [KMFilter]);
 
     return (
         <ScrollView style={styles.container}>
 
-            <KM modalVisible={modalKM} onCancel={() => setModalKM(!modalKM)}/>
+            <KM modalVisible={modalKM} onOk={KMFilterHandler} onCancel={() => setModalKM(!modalKM)}/>
             <LabelPlus
                 icon="speedometer-outline"
                 iconType="Ionicons"
                 label="KM"
                 onPress={KMHandler}
+                onClear={() => setKMFilter(null)}
+                data={KMFilter}
             />
 
             <Price modalVisible={modalPrice} onCancel={() => setModalPrice(!modalPrice)}/>
@@ -197,7 +212,6 @@ function AdvancedSearch() {
                 <Button>
                     Search
                 </Button>
-
                 <FlatButton style={{ textDecorationLine: "underline", color: GlobalStyles.colors.dangerText}}>
                     Clear Filter
                 </FlatButton>
@@ -216,4 +230,11 @@ const styles = StyleSheet.create({
         padding: 12,
         backgroundColor: GlobalStyles.colors.header,
     },
+    floatingButton: {
+        position: "absolute",
+        bottom: 50,
+        left: 5,
+        width: '100%',
+        backgroundColor: 'red'
+    }
 })

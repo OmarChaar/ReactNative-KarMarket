@@ -3,7 +3,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 import { GlobalStyles } from "../../../constants/styles";
 
-function LabelCheckbox({label}) {
+function LabelCheckbox({label, onCheck, isChecked}) {
     return (
         <View style={styles.container}>
             <Text style={styles.label}>
@@ -15,6 +15,8 @@ function LabelCheckbox({label}) {
                 fillColor={GlobalStyles.colors.primaryText}
                 bounceEffect={1}
                 bounceFriction={5}
+                onPress={onCheck}
+                isChecked={isChecked}
             />
 
         </View>
@@ -31,9 +33,10 @@ const styles = StyleSheet.create({
        marginVertical: 12
     },
     label: {
-        fontSize: GlobalStyles.fontSize.small,
+        fontSize: GlobalStyles.fontSize.xsmall,
         fontWeight: 'bold',
-        color: GlobalStyles.colors.primaryText
+        color: GlobalStyles.colors.primaryText,
+        textTransform: 'uppercase'
     },
     checkbox: {
         borderRadius: 0,

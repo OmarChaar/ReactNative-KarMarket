@@ -22,7 +22,14 @@ function DealershipsList({dealerships}) {
     }
 
    return (
-       <FlatList style={styles.list} data={dealerships} keyExtractor={(item) => item.id} renderItem={({item}) => <DealershipCard dealership={item} onSelect={selectDealershipHandler}/>}/>
+       <FlatList 
+            style={styles.list} 
+            data={dealerships} 
+            keyExtractor={(item) => item.id} 
+            renderItem={({item}) => 
+                <DealershipCard dealership={item} onSelect={selectDealershipHandler}/>
+            }
+        />
    )
 }
 

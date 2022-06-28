@@ -1,4 +1,5 @@
 import { StyleSheet, View } from "react-native";
+import LabelCheckbox from "./UX/LabelCheckbox";
 
 import ModalSeach from "./UX/ModalSeach";
 
@@ -11,7 +12,7 @@ function Armored({modalVisible, onCancel, onOk}) {
             onOk={onOk}
         >
             <View style={styles.container}>
-                
+                <LabelCheckbox label="Armored"/>
             </View>
         </ModalSeach>
     )

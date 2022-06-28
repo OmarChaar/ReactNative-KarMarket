@@ -1,4 +1,5 @@
 import { StyleSheet, View } from "react-native";
+import LabelCheckbox from "./UX/LabelCheckbox";
 
 import ModalSeach from "./UX/ModalSeach";
 
@@ -11,7 +12,8 @@ function License({modalVisible, onCancel, onOk}) {
             onOk={onOk}
         >
             <View style={styles.container}>
-                
+                <LabelCheckbox label="0"/>
+                <LabelCheckbox label="1"/>
             </View>
         </ModalSeach>
     )

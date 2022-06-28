@@ -3,19 +3,23 @@ import { GlobalStyles } from "../../../constants/styles";
 import RNPickerSelect from 'react-native-picker-select';
 
 
-function RangePicker({label, data, placeholder}) {
+function RangePicker({label, data, placeholder, onValueChange}) {
     return (
         <View style={styles.container}>
             <Text style={styles.label}>
                 {label}
             </Text>
 
-            <RNPickerSelect
-                onValueChange={(value) => console.log(value)}
-                items={data}
-                placeholder={{label: placeholder}}
-                key={item => item.value}
-            />
+            <View style={styles.pickerContainer}>
+                <RNPickerSelect
+                    onValueChange={onValueChange}
+                    items={data}
+                    placeholder={{label: placeholder}}
+                    key={item => item.value}
+                    style={pickerSelectStyles}
+                />
+            </View>
+            
         </View>
     )
 }
@@ -24,14 +28,35 @@ export default RangePicker;
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginVertical: 12
+        marginVertical: 12,
+        borderBottomColor: GlobalStyles.colors.prompt,
+        borderBottomWidth: 0.5
     },
     label: {
-        fontSize: GlobalStyles.fontSize.small,
+        fontSize: GlobalStyles.fontSize.xsmall,
         fontWeight: '400',
-        color: GlobalStyles.colors.primaryText
-    },
+        color: GlobalStyles.colors.primaryText,
+        textTransform: 'uppercase'
+    }
 });
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+      fontSize: GlobalStyles.fontSize.xsmall,
+      paddingVertical: 6,
+      paddingHorizontal: 10,
+      color: GlobalStyles.colors.secondaryText,
+      textAlign: 'right',
+      width: '100%',
+      fontWeight: 'bold'
+    },
+    inputAndroid: {
+        fontSize: GlobalStyles.fontSize.xsmall,
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        color: GlobalStyles.colors.secondaryText,
+        textAlign: 'right',
+        width: '100%',
+        fontWeight: 'bold'
+    },
+  });

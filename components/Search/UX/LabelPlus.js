@@ -4,7 +4,7 @@ import { Ionicons, MaterialIcons, FontAwesome, MaterialCommunityIcons } from '@e
 import { GlobalStyles } from "../../../constants/styles";
 import IconButton from "../../UI/IconButton"
 
-function LabelPlus({icon, iconType, label, onPress}) {
+function LabelPlus({icon, iconType, label, onPress, onClear, data}) {
     return (
         <View style={styles.container}>
             <View style={styles.labelContainer}>
@@ -27,12 +27,30 @@ function LabelPlus({icon, iconType, label, onPress}) {
                 <Text style={styles.label}>{label}</Text>
             </View>
         
-            <IconButton
-                name="add-circle"
-                size={24} 
-                color={GlobalStyles.colors.primaryText}
-                onPress={onPress}
-            />
+            {data && 
+                <View style={styles.rightSide}>
+                    <Text style={styles.rightSideText}>
+                        {data}
+                    </Text>
+                    <IconButton
+                        name="remove-circle-outline"
+                        size={24} 
+                        color={GlobalStyles.colors.primaryText}
+                        onPress={onClear}
+                        style={{opacity: 0.5}}
+                    />
+                </View>
+            }
+         
+           {!data && 
+                <IconButton
+                    name="add-circle"
+                    size={24} 
+                    color={GlobalStyles.colors.primaryText}
+                    onPress={onPress}
+                />
+           }
+           
 
         </View>
     )
@@ -53,6 +71,7 @@ const styles = StyleSheet.create({
     labelContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        paddingRight: 25,
     },
     icon: {
         marginRight: 10,
@@ -61,5 +80,16 @@ const styles = StyleSheet.create({
     label: {
         fontWeight: 'bold',
         fontSize: GlobalStyles.fontSize.small
+    },
+    rightSide: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1,
+    },
+    rightSideText: {
+        flex: 1,
+        textAlign: 'right',
+        paddingRight: 10,
+        fontWeight: '200'
     }
 })
