@@ -1,10 +1,13 @@
 import { StyleSheet, View } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 
 import ModalSeach from "./UX/ModalSeach";
 import RangePicker from "./UX/RangePicker";
+import { SearchContext } from "../../store/search-context";
 
 function Year({modalVisible, onCancel, onOk}) {
+
+    const searchCtx = useContext(SearchContext);
 
     const YearMinimum = [];
 
@@ -24,11 +27,6 @@ function Year({modalVisible, onCancel, onOk}) {
     const [minYear, setMinYear] = useState();
     const [maxYear, setMaxYear] = useState();
 
-    useEffect(() => {
-        console.log("MIN", minYear);
-        console.log("MAX", maxYear);
-    }, [minYear, maxYear]);
-
     function setMinHandler(value) {
         setMinYear(value);
     }
@@ -37,17 +35,26 @@ function Year({modalVisible, onCancel, onOk}) {
         setMaxYear(value);
     }
 
+    function onOkHandler() {
+        searchCtx.setYear({
+            min: minYear, 
+            max: maxYear
+        });
+        onOk();
+    }
+
     return (
         <ModalSeach 
             modalVisible={modalVisible} 
             title="Year"
             onCancel={onCancel}
-            onOk={onOk}
+            onOk={onOkHandler}
         >
             <View style={styles.container}>
                 <RangePicker
                     label="Year Minimum"
                     data={YearMinimum}
+                    value={minYear}
                     placeholder="Select Minimum"
                     onValueChange={setMinHandler}
                 />
@@ -55,6 +62,7 @@ function Year({modalVisible, onCancel, onOk}) {
                 <RangePicker
                     label="Year Maximum"
                     data={YearMaximum}
+                    value={maxYear}
                     placeholder="Select Minimum"
                     onValueChange={setMaxHandler}
                 />

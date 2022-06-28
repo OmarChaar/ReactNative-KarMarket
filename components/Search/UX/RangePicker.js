@@ -3,7 +3,7 @@ import { GlobalStyles } from "../../../constants/styles";
 import RNPickerSelect from 'react-native-picker-select';
 
 
-function RangePicker({label, data, placeholder, onValueChange}) {
+function RangePicker({label, data, placeholder, onValueChange, value}) {
 
     return (
         <View style={styles.container}>
@@ -15,6 +15,7 @@ function RangePicker({label, data, placeholder, onValueChange}) {
                 <RNPickerSelect
                     onValueChange={onValueChange}
                     items={data}
+                    value={value}
                     pickerProps={{
                         accessibilityLabel: 5000,
                     }}

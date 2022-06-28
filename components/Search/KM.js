@@ -47,11 +47,6 @@ function KM({modalVisible, onCancel, onOk}) {
     const [minKM, setMinKM] = useState();
     const [maxKM, setMaxKM] = useState();
 
-    useEffect(() => {
-        console.log("MIN", minKM);
-        console.log("MAX", maxKM);
-    }, [minKM, maxKM]);
-
     function setMinHandler(value) {
         setMinKM(value);
     }
@@ -61,7 +56,10 @@ function KM({modalVisible, onCancel, onOk}) {
     }
 
     function onOkHandler() {
-        searchCtx.setKM({min: minKM, max: maxKM});
+        searchCtx.setKM({
+            min: minKM, 
+            max: maxKM
+        });
         onOk();
     }
 
@@ -81,6 +79,7 @@ function KM({modalVisible, onCancel, onOk}) {
                         <RangePicker
                             label="KM Minimum"
                             data={KMMinimum}
+                            value={minKM}
                             placeholder="Select Minimum"
                             onValueChange={setMinHandler}
                         />
@@ -88,6 +87,7 @@ function KM({modalVisible, onCancel, onOk}) {
                         <RangePicker
                             label="KM Maximum"
                             data={KMMaximum}
+                            value={maxKM}
                             placeholder="Select Maximum"
                             onValueChange={setMaxHandler}
                         />

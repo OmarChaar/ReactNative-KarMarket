@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
+import { SearchContext } from "../../store/search-context";
 
 import ModalSeach from "./UX/ModalSeach";
 import RangePicker from "./UX/RangePicker";
 
 function Price({modalVisible, onCancel, onOk}) {
+
+    const searchCtx = useContext(SearchContext);
 
     const PriceMinimum = [];
 
@@ -24,11 +27,6 @@ function Price({modalVisible, onCancel, onOk}) {
     const [minPrice, setMinPrice] = useState();
     const [maxPrice, setMaxPrice] = useState();
 
-    useEffect(() => {
-        console.log("MIN", minPrice);
-        console.log("MAX", maxPrice);
-    }, [minPrice, maxPrice]);
-
     function setMinHandler(value) {
         setMinPrice(value);
     }
@@ -37,17 +35,26 @@ function Price({modalVisible, onCancel, onOk}) {
         setMaxPrice(value);
     }
 
+    function onOkHandler() {
+        searchCtx.setPrice({
+            min: minPrice, 
+            max: maxPrice
+        });
+        onOk();
+    }
+
     return (
         <ModalSeach 
             modalVisible={modalVisible} 
             title="Price"
             onCancel={onCancel}
-            onOk={onOk}
+            onOk={onOkHandler}
         >
             <View style={styles.container}>
                 <RangePicker
                     label="Price Minimum"
                     data={PriceMinimum}
+                    value={minPrice}
                     placeholder="Select Minimum"
                     onValueChange={setMinHandler}
                 />
@@ -55,6 +62,7 @@ function Price({modalVisible, onCancel, onOk}) {
                 <RangePicker
                     label="Price Maximum"
                     data={PriceMaximum}
+                    value={maxPrice}
                     placeholder="Select Minimum"
                     onValueChange={setMaxHandler}
                 />

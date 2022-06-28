@@ -23,22 +23,25 @@ function AdvancedSearch() {
 
     const searchCtx = useContext(SearchContext);
 
-    const [modalKM, setModalKM] = useState(false);
     const [KMFilter, setKMFilter] = useState('');
+    const [KMSet, setKMSet] = useState(false);
     function KMFilterHandler() {
-
-        let min = '';
-        let max = '';
-        if(searchCtx.KM.min) {
-            min += 'from ' + searchCtx.KM.min.toLocaleString();;
-        }
-        if(searchCtx.KM.max) {
-            max = ' to ' + searchCtx.KM.max.toLocaleString();
-        }
-        
-        setKMFilter(min + max);
-        setModalKM(!modalKM);
+        setKMSet(true);
     }
+
+    const [PriceFilter, setPriceFilter] = useState('');
+    const [PriceSet, setPriceSet] = useState(false);
+    function PriceFilterHandler() {
+        setPriceSet(true);
+    }
+   
+    const [YearFilter, setYearFilter] = useState('');
+    const [YearSet, setYearSet] = useState(false);
+    function YearFilterHandler() {
+        setYearSet(true);
+    }
+
+    const [modalKM, setModalKM] = useState(false);
     function KMHandler() {
         setModalKM(true);
     }
@@ -104,8 +107,46 @@ function AdvancedSearch() {
     }
 
     useEffect(() => {
-        console.log("KMFilter", KMFilter);
-    }, [KMFilter]);
+        if(KMSet) {
+            let min = '';
+            let max = '';
+            if(searchCtx.KM.min) {
+                min += 'from ' + searchCtx.KM.min.toLocaleString();;
+            }
+            if(searchCtx.KM.max) {
+                max = ' to ' + searchCtx.KM.max.toLocaleString();
+            }
+            setKMFilter(min + max);
+            setModalKM(!modalKM);
+            setKMSet(false);
+        }
+        if(PriceSet) {
+            let min = '';
+            let max = '';
+            if(searchCtx.Price.min) {
+                min += 'from ' + searchCtx.Price.min.toLocaleString();;
+            }
+            if(searchCtx.Price.max) {
+                max = ' to ' + searchCtx.Price.max.toLocaleString();
+            }
+            setPriceFilter(min + max);
+            setModalPrice(!modalPrice);
+            setPriceSet(false);
+        }
+        if(YearSet) {
+            let min = '';
+            let max = '';
+            if(searchCtx.Year.min) {
+                min += 'from ' + searchCtx.Year.min;
+            }
+            if(searchCtx.Year.max) {
+                max = ' to ' + searchCtx.Year.max;
+            }
+            setYearFilter(min + max);
+            setModalYear(!modalYear);
+            setYearSet(false);
+        }
+    }, [KMSet, PriceSet, YearSet]);
 
     return (
         <ScrollView style={styles.container}>
@@ -118,15 +159,18 @@ function AdvancedSearch() {
                 onPress={KMHandler}
                 onPressText={() => setModalKM(!modalKM)}
                 onClear={() => setKMFilter(null)}
-                data={KMFilter}
+                data={KMFilter ? KMFilter : null}
             />
 
-            <Price modalVisible={modalPrice} onCancel={() => setModalPrice(!modalPrice)}/>
+            <Price modalVisible={modalPrice} onOk={PriceFilterHandler} onCancel={() => setModalPrice(!modalPrice)}/>
             <LabelPlus
                 icon="logo-usd"
                 iconType="Ionicons"
                 label="Price"
                 onPress={PriceHandler}
+                onPressText={() => setModalPrice(!modalPrice)}
+                onClear={() => setPriceFilter(null)}
+                data={PriceFilter ? PriceFilter : null}
             />
 
             <Brand modalVisible={modalBrand} onCancel={() => setModalBrand(!modalBrand)}/>
@@ -153,12 +197,15 @@ function AdvancedSearch() {
                 onPress={VersionHandler}
             />
 
-            <Year modalVisible={modalYear} onCancel={() => setModalYear(!modalYear)}/>
+            <Year modalVisible={modalYear} onOk={YearFilterHandler} onCancel={() => setModalYear(!modalYear)}/>
             <LabelPlus
                 icon="calendar-outline"
                 iconType="Ionicons"
                 label="Year"
                 onPress={YearHandler}
+                onPressText={() => setModalYear(!modalYear)}
+                onClear={() => setYearFilter(null)}
+                data={YearFilter ? YearFilter : null}
             />
 
             <Color modalVisible={modalColor} onCancel={() => setModalColor(!modalColor)}/>
