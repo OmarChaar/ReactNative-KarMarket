@@ -1,10 +1,10 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Ionicons, MaterialIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 import { GlobalStyles } from "../../../constants/styles";
 import IconButton from "../../UI/IconButton"
 
-function LabelPlus({icon, iconType, label, onPress, onClear, data}) {
+function LabelPlus({icon, iconType, label, onPress, onPressText, onClear, data}) {
     return (
         <View style={styles.container}>
             <View style={styles.labelContainer}>
@@ -28,18 +28,20 @@ function LabelPlus({icon, iconType, label, onPress, onClear, data}) {
             </View>
         
             {data && 
-                <View style={styles.rightSide}>
-                    <Text style={styles.rightSideText}>
-                        {data}
-                    </Text>
-                    <IconButton
-                        name="remove-circle-outline"
-                        size={24} 
-                        color={GlobalStyles.colors.primaryText}
-                        onPress={onClear}
-                        style={{opacity: 0.5}}
-                    />
-                </View>
+                <Pressable onPress={onPressText} style={{flex: 1}}>
+                    <View style={styles.rightSide}>
+                        <Text style={styles.rightSideText}>
+                            {data}
+                        </Text>
+                        <IconButton
+                            name="remove-circle-outline"
+                            size={24} 
+                            color={GlobalStyles.colors.primaryText}
+                            onPress={onClear}
+                            style={{opacity: 0.5}}
+                        />
+                    </View>
+                </Pressable>
             }
          
            {!data && 

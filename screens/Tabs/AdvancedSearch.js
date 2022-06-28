@@ -26,8 +26,8 @@ function AdvancedSearch() {
     const [modalKM, setModalKM] = useState(false);
     const [KMFilter, setKMFilter] = useState();
     function KMFilterHandler() {
-        const min = searchCtx.KM.min ? 'from ' + searchCtx.KM.min.toLocaleString() : '';
-        const max = searchCtx.KM.max ? ' to ' + searchCtx.KM.max.toLocaleString() : '';
+        const min = searchCtx.KM.min != undefined ? 'from ' + searchCtx.KM.min.toLocaleString() : '';
+        const max = searchCtx.KM.max != undefined ? ' to ' + searchCtx.KM.max.toLocaleString() : '';
         setKMFilter(min +  max);
         setModalKM(!modalKM);
     }
@@ -108,6 +108,7 @@ function AdvancedSearch() {
                 iconType="Ionicons"
                 label="KM"
                 onPress={KMHandler}
+                onPressText={() => setModalKM(!modalKM)}
                 onClear={() => setKMFilter(null)}
                 data={KMFilter}
             />
