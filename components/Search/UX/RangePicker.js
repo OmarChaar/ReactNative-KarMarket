@@ -4,6 +4,7 @@ import RNPickerSelect from 'react-native-picker-select';
 
 
 function RangePicker({label, data, placeholder, onValueChange}) {
+
     return (
         <View style={styles.container}>
             <Text style={styles.label}>
@@ -14,6 +15,9 @@ function RangePicker({label, data, placeholder, onValueChange}) {
                 <RNPickerSelect
                     onValueChange={onValueChange}
                     items={data}
+                    pickerProps={{
+                        accessibilityLabel: 5000,
+                    }}
                     placeholder={{label: placeholder}}
                     key={item => item.value}
                     style={pickerSelectStyles}

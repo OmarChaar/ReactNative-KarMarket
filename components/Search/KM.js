@@ -10,8 +10,6 @@ function KM({modalVisible, onCancel, onOk}) {
 
     const searchCtx = useContext(SearchContext);
 
-    console.log("searchCtx", searchCtx.KM);
-
     const KMMinimum = [
         {label: '0 KM', value: 0}, 
         {label: '5,000 KM', value: 5000}, 

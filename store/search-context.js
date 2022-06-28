@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const SearchContext = createContext({
     KM: null,
@@ -8,7 +7,7 @@ export const SearchContext = createContext({
 
 function SearchContextProvider({ children }) {
 
-    const [KM, setKM] = useState();
+    const [KM, setKM] = useState({});
 
     function setKMHandler(value) {
         setKM(value);

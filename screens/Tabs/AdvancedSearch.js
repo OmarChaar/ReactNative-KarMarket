@@ -24,11 +24,19 @@ function AdvancedSearch() {
     const searchCtx = useContext(SearchContext);
 
     const [modalKM, setModalKM] = useState(false);
-    const [KMFilter, setKMFilter] = useState();
+    const [KMFilter, setKMFilter] = useState('');
     function KMFilterHandler() {
-        const min = searchCtx.KM.min != undefined ? 'from ' + searchCtx.KM.min.toLocaleString() : '';
-        const max = searchCtx.KM.max != undefined ? ' to ' + searchCtx.KM.max.toLocaleString() : '';
-        setKMFilter(min +  max);
+
+        let min = '';
+        let max = '';
+        if(searchCtx.KM.min) {
+            min += 'from ' + searchCtx.KM.min.toLocaleString();;
+        }
+        if(searchCtx.KM.max) {
+            max = ' to ' + searchCtx.KM.max.toLocaleString();
+        }
+        
+        setKMFilter(min + max);
         setModalKM(!modalKM);
     }
     function KMHandler() {
