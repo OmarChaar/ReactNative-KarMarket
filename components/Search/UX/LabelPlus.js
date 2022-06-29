@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         padding: 12,
         alignItems: 'center',
         borderBottomWidth: 0.5,
-        borderBottomColor: GlobalStyles.colors.primaryText,
+        borderBottomColor: GlobalStyles.colors.modalBackground,
     },
     labelContainer: {
         flexDirection: 'row',

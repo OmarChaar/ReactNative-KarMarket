@@ -1,14 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 import { GlobalStyles } from "../../../constants/styles";
 
-function LabelCheckbox({label, onCheck, isChecked}) {
+function LabelCheckbox({label, onCheck, isChecked, imageSource}) {
+
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>
-                {label}
-            </Text>
+            <View style={styles.labelContainer}>
+                {imageSource &&
+                    <Image
+                        style={styles.icon}
+                        source={imageSource}
+                    />
+                }
+                <Text style={styles.label}>
+                    {label}
+                </Text>
+            </View>
+            
 
             <BouncyCheckbox 
                 iconStyle={styles.checkbox} 
@@ -30,7 +40,13 @@ const styles = StyleSheet.create({
        flexDirection: 'row',
        justifyContent: 'space-between',
        alignItems: 'center',
-       marginVertical: 12
+       borderBottomWidth: 0.5,
+       borderBottomColor: GlobalStyles.colors.modalBackground,
+       paddingVertical: 16,
+    },
+    labelContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     label: {
         fontSize: GlobalStyles.fontSize.xsmall,
@@ -42,7 +58,13 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         borderWidth: 2,
         borderColor: GlobalStyles.colors.primaryText,
-        height: 20,
-        width: 20
+        height: 15,
+        width: 15
+    },
+    icon: {
+        width: Dimensions.get('screen').width / 10,
+        marginRight: 10,
+        aspectRatio: 1,
+        resizeMode: 'contain'
     }
 })

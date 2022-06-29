@@ -34,7 +34,7 @@ export default RangePicker;
 const styles = StyleSheet.create({
     container: {
         marginVertical: 12,
-        borderBottomColor: GlobalStyles.colors.prompt,
+        borderBottomColor: GlobalStyles.colors.modalBackground,
         borderBottomWidth: 0.5
     },
     label: {

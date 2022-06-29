@@ -1,5 +1,5 @@
 
-import { Modal, StyleSheet, View, Text } from "react-native";
+import { Modal, StyleSheet, View, Text, Dimensions } from "react-native";
 import { GlobalStyles } from "../../../constants/styles";
 import FlatButton from "../../UI/FlatButton";
 
@@ -20,10 +20,9 @@ function ModalSeach({children, modalVisible, title, onCancel, onOk}) {
           </View>
           
           <View style={styles.childrenView}>
-            {children}
+            {children}     
           </View>
             
-
           <View style={styles.buttonContainer}>
             <FlatButton 
               style={{color: GlobalStyles.colors.dangerText}}
@@ -56,8 +55,8 @@ const styles = StyleSheet.create({
   },
   modalView: {
     flexDirection: 'column',
-    minHeight: '15%',
-    maxHeight: '90%',
+    overflow: 'hidden',
+    maxHeight: '75%',
     width: '90%',
     backgroundColor: "white",
     borderRadius: 20,
@@ -71,8 +70,8 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   childrenView: {
-    height: 'auto',
     padding: 12,
+    flexShrink: 1,
   },
   titleContainer: {
     backgroundColor: GlobalStyles.colors.header,
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     fontSize: GlobalStyles.fontSize.small,
