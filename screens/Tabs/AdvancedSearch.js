@@ -18,6 +18,7 @@ import Button from "../../components/UI/Button";
 import FlatButton from "../../components/UI/FlatButton";
 import { GlobalStyles } from "../../constants/styles";
 import { SearchContext } from "../../store/search-context";
+import { capitalizeText } from "../../util/format";
 
 function AdvancedSearch() {
 
@@ -39,6 +40,12 @@ function AdvancedSearch() {
     const [YearSet, setYearSet] = useState(false);
     function YearFilterHandler() {
         setYearSet(true);
+    }
+
+    const [BrandFilter, setBrandFilter] = useState('');
+    const [BrandSet, setBrandSet] = useState(false);
+    function BrandFilterHandler() {
+        setBrandSet(true);
     }
 
     const [modalKM, setModalKM] = useState(false);
@@ -146,7 +153,23 @@ function AdvancedSearch() {
             setModalYear(!modalYear);
             setYearSet(false);
         }
-    }, [KMSet, PriceSet, YearSet]);
+        if(BrandSet) {
+            console.log(searchCtx.Brand);
+
+            let str = '';
+            for(const brand of searchCtx.Brand) {
+                str += capitalizeText(brand) + ' - '
+            }
+
+            setBrandFilter(str.slice(0, -2));
+            setModalBrand(!modalBrand);
+            setBrandSet(false);
+        }
+    }, [KMSet, PriceSet, YearSet, BrandSet]);
+
+    function clearFilterHandler() {
+
+    }
 
     return (
         <ScrollView style={styles.container}>
@@ -173,12 +196,15 @@ function AdvancedSearch() {
                 data={PriceFilter ? PriceFilter : null}
             />
 
-            <Brand modalVisible={modalBrand} onCancel={() => setModalBrand(!modalBrand)}/>
+            <Brand modalVisible={modalBrand} onOk={BrandFilterHandler} onCancel={() => setModalBrand(!modalBrand)}/>
             <LabelPlus
                 icon="car-sport-outline"
                 iconType="Ionicons"
                 label="Brand"
                 onPress={BrandHandler}
+                onPressText={() => setModalBrand(!modalBrand)}
+                onClear={() => setBrandFilter(null)}
+                data={BrandFilter ? BrandFilter : null}
             />
 
             <Model modalVisible={modalModel} onCancel={() => setModalModel(!modalModel)}/>
@@ -268,7 +294,7 @@ function AdvancedSearch() {
                 <Button>
                     Search
                 </Button>
-                <FlatButton style={{ textDecorationLine: "underline", color: GlobalStyles.colors.dangerText}}>
+                <FlatButton onPress={clearFilterHandler} style={{ textDecorationLine: "underline", color: GlobalStyles.colors.dangerText}}>
                     Clear Filter
                 </FlatButton>
             </View>

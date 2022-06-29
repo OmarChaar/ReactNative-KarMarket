@@ -5,9 +5,11 @@ export const SearchContext = createContext({
     KM: {},
     Price: {},
     Year: {},
+    Brand: [],
     setKM: () => {},
     setPrice: () => {},
-    setYear: () => {}
+    setYear: () => {},
+    setBrand: () => {}
 });
 
 function SearchContextProvider({ children }) {
@@ -30,13 +32,21 @@ function SearchContextProvider({ children }) {
         setYearHandler(obj);
     }
 
+    const [Brand, setBrandHandler] = useState([]);
+
+    function setBrand(obj) {
+        setBrandHandler(obj);
+    }
+
     const value = {
         KM: KM,
         Price: Price,
         Year: Year,
+        Brand: Brand,
         setKM: setKM,
         setPrice: setPrice,
-        setYear: setYear
+        setYear: setYear,
+        setBrand: setBrand
     }
 
     return <SearchContext.Provider value={value}>{children}</SearchContext.Provider>

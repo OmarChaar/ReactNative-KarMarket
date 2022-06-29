@@ -3,7 +3,7 @@ import { Modal, StyleSheet, View, Text, Dimensions } from "react-native";
 import { GlobalStyles } from "../../../constants/styles";
 import FlatButton from "../../UI/FlatButton";
 
-function ModalSeach({children, modalVisible, title, onCancel, onOk}) {
+function ModalSeach({children, modalVisible, title, onCancel, onOk, full}) {
   return (
     <Modal
       animationType="fade"
@@ -11,7 +11,7 @@ function ModalSeach({children, modalVisible, title, onCancel, onOk}) {
       visible={modalVisible}
     >
       <View style={styles.centeredView}>
-        <View style={styles.modalView}>
+        <View style={!full ? styles.modalView : [styles.modalView, {height: '75%'}]}>
 
           <View style={styles.titleContainer}>
             <Text style={styles.title}>
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   childrenView: {
-    // padding: 12,
     flexShrink: 1,
+    flexGrow: 1
   },
   titleContainer: {
     backgroundColor: GlobalStyles.colors.header,
