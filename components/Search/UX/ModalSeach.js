@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   childrenView: {
-    padding: 12,
+    // padding: 12,
     flexShrink: 1,
   },
   titleContainer: {

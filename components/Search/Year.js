@@ -75,6 +75,6 @@ export default Year;
 
 const styles = StyleSheet.create({
     container: {
-       
+       padding: 12
     },
 })

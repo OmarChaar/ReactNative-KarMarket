@@ -76,20 +76,23 @@ function Brand({modalVisible, onCancel, onOk}) {
             onCancel={onCancel}
             onOk={onOk}
         >
-            {/* <SearchModal /> */}
-            <View style={styles.container}>
-                <FlatList
-                    data={brand}
-                    showsVerticalScrollIndicator={false}
-                    keyExtractor={(item) => item.label}
-                    renderItem={({item}) =>
-                        <LabelCheckbox
-                            label={item.label}
-                            imageSource={item.imageSource}
-                        />
-                    }
-                />
+            <View style={{flexShrink: 1, overflow: 'hidden'}}>
+                <SearchModal />
+                <View style={styles.container}>
+                    <FlatList
+                        data={brand}
+                        showsVerticalScrollIndicator={false}
+                        keyExtractor={(item) => item.label}
+                        renderItem={({item}) =>
+                            <LabelCheckbox
+                                label={item.label}
+                                imageSource={item.imageSource}
+                            />
+                        }
+                    />
+                </View>
             </View>
+           
         </ModalSeach>
     )
 }

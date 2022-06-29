@@ -21,6 +21,6 @@ export default Model;
 
 const styles = StyleSheet.create({
     container: {
-       
+       padding: 12
     },
 })

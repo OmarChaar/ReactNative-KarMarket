@@ -76,6 +76,6 @@ export default Price;
 
 const styles = StyleSheet.create({
     container: {
-       
+       padding: 12
     },
 })

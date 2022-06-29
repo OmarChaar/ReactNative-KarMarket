@@ -16,9 +16,6 @@ function RangePicker({label, data, placeholder, onValueChange, value}) {
                     onValueChange={onValueChange}
                     items={data}
                     value={value}
-                    pickerProps={{
-                        accessibilityLabel: 5000,
-                    }}
                     placeholder={{label: placeholder}}
                     key={item => item.value}
                     style={pickerSelectStyles}
@@ -62,6 +59,6 @@ const pickerSelectStyles = StyleSheet.create({
         color: GlobalStyles.colors.secondaryText,
         textAlign: 'right',
         width: '100%',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
   });

@@ -39,6 +39,6 @@ export default Transmission;
 
 const styles = StyleSheet.create({
     container: {
-       
+       padding: 12
     },
 })

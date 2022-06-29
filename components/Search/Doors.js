@@ -23,6 +23,6 @@ export default Doors;
 
 const styles = StyleSheet.create({
     container: {
-       
+       padding: 12
     },
 })

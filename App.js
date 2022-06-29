@@ -82,7 +82,7 @@ function AuthenticatedStack() {
         name='Map'
         component={Map}
         options={{
-          title: 'Locate Place',
+          headerTitle: 'Locate Place',
           headerTitleAlign: 'center',
         }}
       />
@@ -90,14 +90,14 @@ function AuthenticatedStack() {
         name='DealershipDetails'
         component={DealershipDetails}
         options={{
-          title: 'Loading Dealership...'
+          headerTitle: 'Loading Dealership...'
         }}
       />
       <Stack.Screen 
         name='VehicleDetails'
         component={VehicleDetails}
         options={{
-          title: 'Loading Vehicle...'
+          headerTitle: 'Loading Vehicle...'
         }}
       />
       {/* <Stack.Screen 
@@ -145,7 +145,7 @@ function BottomTabNavigation() {
         component={Settings} 
         options={{
           headerTitleAlign: 'center',
-          title: 'Settings',
+          headerTitle: 'Settings',
           headerStyle: {
             backgroundColor: GlobalStyles.colors.header,
           },

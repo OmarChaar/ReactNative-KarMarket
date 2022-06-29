@@ -43,6 +43,6 @@ export default Combustion;
 
 const styles = StyleSheet.create({
     container: {
-       
+       padding: 12
     },
 })
