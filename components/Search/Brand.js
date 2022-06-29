@@ -1,7 +1,9 @@
-import { FlatList, StyleSheet, View, Image, Text, ScrollView } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 
+import SearchModal from "./UX/SearchModal";
 import ModalSeach from "./UX/ModalSeach";
-import LabelCheckbox from "./UX/LabelCheckbox"
+import LabelCheckbox from "./UX/LabelCheckbox";
+
 function Brand({modalVisible, onCancel, onOk}) {
 
     const brand = [
@@ -74,6 +76,7 @@ function Brand({modalVisible, onCancel, onOk}) {
             onCancel={onCancel}
             onOk={onOk}
         >
+            {/* <SearchModal /> */}
             <View style={styles.container}>
                 <FlatList
                     data={brand}
@@ -95,6 +98,6 @@ export default Brand;
 
 const styles = StyleSheet.create({
     container: {
-   
+        padding: 12
     },
 })

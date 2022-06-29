@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
        alignItems: 'center',
        borderBottomWidth: 0.5,
        borderBottomColor: GlobalStyles.colors.modalBackground,
-       paddingVertical: 16,
+       paddingVertical: 12,
     },
     labelContainer: {
         flexDirection: 'row',

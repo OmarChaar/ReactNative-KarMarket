@@ -40,15 +40,16 @@ const styles = StyleSheet.create({
     },
     button: {
         flex: 1,
-        borderRadius: 6
+        borderRadius: 6,
     },
     imageBackground: {
         width: '100%',
         height: '100%',
-        borderRadius: 6
+        borderRadius: 6,
     },  
     image: {
-        resizeMode: 'contain',
+        resizeMode: 'stretch',
+        backgroundColor: 'white',
         borderRadius: 6
     },
     labelContainer: {
