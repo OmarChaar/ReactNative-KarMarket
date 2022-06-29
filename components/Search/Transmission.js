@@ -21,6 +21,7 @@ function Transmission({modalVisible, onCancel, onOk}) {
             <View style={styles.container}>
                 <FlatList
                     data={TransmissionOptions}
+                    scrollEnabled={false}
                     keyExtractor={(item) => item.id}
                     renderItem={({item}) => 
                         <LabelCheckbox 

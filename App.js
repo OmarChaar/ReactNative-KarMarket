@@ -15,7 +15,7 @@ import DealershipDetails from './screens/Stacks/DealershipDetails';
 import Home from './screens/Tabs/Home';
 import Vehicles from './screens/Stacks/Vehicles';
 import VehicleDetails from './screens/Stacks/VehicleDetails';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons'; 
 import LoginScreen from './screens/Auth/LoginScreen';
 import SignupScreen from './screens/Auth/SignupScreen';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
@@ -134,7 +134,7 @@ function BottomTabNavigation() {
         name="Search"
         component={AdvancedSearch}
         options={{
-          tabBarIcon: ({size, color}) => <Ionicons name="triangle" size={size} color={color} />,
+          tabBarIcon: ({size, color}) => <FontAwesome5 name="searchengin" size={size} color={color} />,
           headerStyle: {
             backgroundColor: GlobalStyles.colors.header,
           },

@@ -25,6 +25,7 @@ function Combustion({modalVisible, onCancel, onOk}) {
             <View style={styles.container}>
                 <FlatList
                     data={CombustionOptions}
+                    scrollEnabled={false}
                     keyExtractor={(item) => item.id}
                     renderItem={({item}) => 
                         <LabelCheckbox 
