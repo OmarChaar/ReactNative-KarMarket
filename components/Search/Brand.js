@@ -93,6 +93,9 @@ function Brand({modalVisible, onCancel, onOk}) {
         }
     }
 
+    function clearBrands() {
+        setBrands(brandsBackup);
+    }
 
     function onOkHandler() {
         const selected = [];
@@ -116,7 +119,7 @@ function Brand({modalVisible, onCancel, onOk}) {
             full={true}
         >
             <View style={{flexShrink: 1, overflow: 'hidden'}}>
-                <SearchModal onChangeText={searchBrands}/>
+                <SearchModal onClearPress={clearBrands} onChangeText={searchBrands}/>
                 <View style={styles.container}>
                     <FlatList
                         data={brands}

@@ -29,17 +29,30 @@ function AdvancedSearch() {
     function KMFilterHandler() {
         setKMSet(true);
     }
+    function clearKMFilterHandler() {
+        setKMFilter(null);
+        searchCtx.setKM(null);
+    }
 
     const [PriceFilter, setPriceFilter] = useState('');
     const [PriceSet, setPriceSet] = useState(false);
     function PriceFilterHandler() {
         setPriceSet(true);
     }
+    function clearPriceFilterHandler() {
+        setPriceFilter(null);
+        searchCtx.setPrice(null);
+    }
+
    
     const [YearFilter, setYearFilter] = useState('');
     const [YearSet, setYearSet] = useState(false);
     function YearFilterHandler() {
         setYearSet(true);
+    }
+    function clearYearFilterHandler() {
+        setYearFilter(null);
+        searchCtx.setYear(null);
     }
 
     const [BrandFilter, setBrandFilter] = useState('');
@@ -47,17 +60,79 @@ function AdvancedSearch() {
     function BrandFilterHandler() {
         setBrandSet(true);
     }
+    function clearBrandFilterHandler() {
+        setBrandFilter(null);
+        searchCtx.setBrand(null);
+    }
 
     const [CombustionFilter, setCombustionFilter] = useState('');
     const [CombustionSet, setCombustionSet] = useState(false);
     function CombustionFilterHandler() {
         setCombustionSet(true);
     }
+    function clearCombustionFilterHandler() {
+        setCombustionFilter(null);
+        searchCtx.setCombustion(null);
+    }
 
     const [TransmissionFilter, setTransmissionFilter] = useState('');
     const [TransmissionSet, setTransmissionSet] = useState(false);
     function TransmissionFilterHandler() {
         setTransmissionSet(true);
+    }
+    function clearTransmissionFilterHandler() {
+        setTransmissionFilter(null);
+        searchCtx.setTransmission(null);
+    }
+
+    const [ColorFilter, setColorFilter] = useState('');
+    const [ColorSet, setColorSet] = useState(false);
+    function ColorFilterHandler() {
+        setColorSet(true);
+    }
+    function clearColorFilterHandler() {
+        setColorFilter(null);
+        searchCtx.setColor(null);
+    }
+
+    const [OptionsFilter, setOptionsFilter] = useState('');
+    const [OptionsSet, setOptionsSet] = useState(false);
+    function OptionsFilterHandler() {
+        setOptionsSet(true);
+    }
+    function clearOptionsFilterHandler() {
+        setOptionsFilter(null);
+        searchCtx.setOptions(null);
+    }
+
+    const [ArmoredFilter, setArmoredFilter] = useState('');
+    const [ArmoredSet, setArmoredSet] = useState(false);
+    function ArmoredFilterHandler() {
+        setArmoredSet(true);
+    }
+    function clearArmoredFilterHandler() {
+        setArmoredFilter(null);
+        searchCtx.setArmored(null);
+    }
+
+    const [DoorsFilter, setDoorsFilter] = useState('');
+    const [DoorsSet, setDoorsSet] = useState(false);
+    function DoorsFilterHandler() {
+        setDoorsSet(true);
+    }
+    function clearDoorsFilterHandler() {
+        setDoorsFilter(null);
+        searchCtx.setDoors(null);
+    }
+
+    const [EndLicenseFilter, setEndLicenseFilter] = useState('');
+    const [EndLicenseSet, setEndLicenseSet] = useState(false);
+    function EndLicenseFilterHandler() {
+        setEndLicenseSet(true);
+    }
+    function clearEndLicenseFilterHandler() {
+        setEndLicenseFilter(null);
+        searchCtx.setEndLicense(null);
     }
 
     const [modalKM, setModalKM] = useState(false);
@@ -123,6 +198,12 @@ function AdvancedSearch() {
     const [modalEndLicense, setModalEndLicense] = useState(false);
     function EndLicenseHandler() {
         setModalEndLicense(true);
+    }
+
+    const [applySearch, setApplySearch] = useState(false);
+
+    function applySearchHandler() {
+        setApplySearch(true);
     }
 
     useEffect(() => {
@@ -201,6 +282,30 @@ function AdvancedSearch() {
         }
     }, [KMSet, PriceSet, YearSet, BrandSet, TransmissionSet, CombustionSet]);
 
+    useEffect(() => {
+        if(applySearch) {
+            if(searchCtx.KM != null) {
+                console.log("KM", searchCtx.KM);
+            }
+            if(searchCtx.Price != null) {
+                console.log("Price", searchCtx.Price);
+            }
+            if(searchCtx.Year != null) {
+                console.log("Year", searchCtx.Year);
+            }
+            if(searchCtx.Brand != null) {
+                console.log("Brand", searchCtx.Brand);
+            }
+            if(searchCtx.Transmission != null) {
+                console.log("Transmission", searchCtx.Transmission);
+            }
+            if(searchCtx.Combustion != null) {
+                console.log("Combustion", searchCtx.Combustion);
+            }
+            setApplySearch(false);
+        }
+    }, [applySearch]);
+
     function clearFilterHandler() {
 
     }
@@ -216,7 +321,7 @@ function AdvancedSearch() {
                     label="KM"
                     onPress={KMHandler}
                     onPressText={() => setModalKM(!modalKM)}
-                    onClear={() => setKMFilter(null)}
+                    onClear={clearKMFilterHandler}
                     data={KMFilter ? KMFilter : null}
                 />
 
@@ -227,7 +332,7 @@ function AdvancedSearch() {
                     label="Price"
                     onPress={PriceHandler}
                     onPressText={() => setModalPrice(!modalPrice)}
-                    onClear={() => setPriceFilter(null)}
+                    onClear={clearPriceFilterHandler}
                     data={PriceFilter ? PriceFilter : null}
                 />
 
@@ -238,7 +343,7 @@ function AdvancedSearch() {
                     label="Brand"
                     onPress={BrandHandler}
                     onPressText={() => setModalBrand(!modalBrand)}
-                    onClear={() => setBrandFilter(null)}
+                    onClear={clearBrandFilterHandler}
                     data={BrandFilter ? BrandFilter : null}
                 />
 
@@ -265,7 +370,7 @@ function AdvancedSearch() {
                     label="Year"
                     onPress={YearHandler}
                     onPressText={() => setModalYear(!modalYear)}
-                    onClear={() => setYearFilter(null)}
+                    onClear={clearYearFilterHandler}
                     data={YearFilter ? YearFilter : null}
                 />
 
@@ -284,7 +389,7 @@ function AdvancedSearch() {
                     label="Transmission"
                     onPress={TransmissionHandler}
                     onPressText={() => setModalTransmission(!modalTransmission)}
-                    onClear={() => setTransmissionFilter(null)}
+                    onClear={clearTransmissionFilterHandler}
                     data={TransmissionFilter ? TransmissionFilter : null}
                 />
 
@@ -295,7 +400,7 @@ function AdvancedSearch() {
                     label="Combustion"
                     onPress={CombustionHandler}
                     onPressText={() => setModalCombustion(!modalCombustion)}
-                    onClear={() => setCombustionFilter(null)}
+                    onClear={clearCombustionFilterHandler}
                     data={CombustionFilter ? CombustionFilter : null}
                 />
 
@@ -341,7 +446,7 @@ function AdvancedSearch() {
             </ScrollView>
 
             <View style={styles.floatingButton}>
-                <Button>
+                <Button onPress={applySearchHandler}>
                     Search
                 </Button>
             </View>
