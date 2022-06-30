@@ -6,10 +6,14 @@ export const SearchContext = createContext({
     Price: {},
     Year: {},
     Brand: [],
+    Transmission: [],
+    Combustion: [],
     setKM: () => {},
     setPrice: () => {},
     setYear: () => {},
-    setBrand: () => {}
+    setBrand: () => {},
+    setTransmission: () => {},
+    setCombustion: () => {}
 });
 
 function SearchContextProvider({ children }) {
@@ -38,15 +42,31 @@ function SearchContextProvider({ children }) {
         setBrandHandler(obj);
     }
 
+    const [Transmission, setTransmissionHandler] = useState([]);
+
+    function setTransmission(obj) {
+        setTransmissionHandler(obj);
+    }
+
+    const [Combustion, setCombustionHandler] = useState([]);
+
+    function setCombustion(obj) {
+        setCombustionHandler(obj);
+    }
+
     const value = {
         KM: KM,
         Price: Price,
         Year: Year,
         Brand: Brand,
+        Transmission: Transmission,
+        Combustion: Combustion,
         setKM: setKM,
         setPrice: setPrice,
         setYear: setYear,
-        setBrand: setBrand
+        setBrand: setBrand,
+        setTransmission: setTransmission,
+        setCombustion: setCombustion
     }
 
     return <SearchContext.Provider value={value}>{children}</SearchContext.Provider>

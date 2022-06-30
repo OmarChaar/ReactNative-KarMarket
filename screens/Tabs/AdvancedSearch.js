@@ -48,6 +48,18 @@ function AdvancedSearch() {
         setBrandSet(true);
     }
 
+    const [CombustionFilter, setCombustionFilter] = useState('');
+    const [CombustionSet, setCombustionSet] = useState(false);
+    function CombustionFilterHandler() {
+        setCombustionSet(true);
+    }
+
+    const [TransmissionFilter, setTransmissionFilter] = useState('');
+    const [TransmissionSet, setTransmissionSet] = useState(false);
+    function TransmissionFilterHandler() {
+        setTransmissionSet(true);
+    }
+
     const [modalKM, setModalKM] = useState(false);
     function KMHandler() {
         setModalKM(true);
@@ -165,140 +177,175 @@ function AdvancedSearch() {
             setModalBrand(!modalBrand);
             setBrandSet(false);
         }
-    }, [KMSet, PriceSet, YearSet, BrandSet]);
+        if(TransmissionSet) {
+
+            let str = '';
+            for(const transmission of searchCtx.Transmission) {
+                str += capitalizeText(transmission) + ' - '
+            }
+
+            setTransmissionFilter(str.slice(0, -2));
+            setModalTransmission(!modalTransmission);
+            setTransmissionSet(false);
+        }
+        if(CombustionSet) {
+
+            let str = '';
+            for(const combustion of searchCtx.Combustion) {
+                str += capitalizeText(combustion) + ' - '
+            }
+
+            setCombustionFilter(str.slice(0, -2));
+            setModalCombustion(!modalCombustion);
+            setCombustionSet(false);
+        }
+    }, [KMSet, PriceSet, YearSet, BrandSet, TransmissionSet, CombustionSet]);
 
     function clearFilterHandler() {
 
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={{flex: 1}}>
+            <ScrollView style={styles.container}>
 
-            <KM modalVisible={modalKM} onOk={KMFilterHandler} onCancel={() => setModalKM(!modalKM)}/>
-            <LabelPlus
-                icon="speedometer-outline"
-                iconType="Ionicons"
-                label="KM"
-                onPress={KMHandler}
-                onPressText={() => setModalKM(!modalKM)}
-                onClear={() => setKMFilter(null)}
-                data={KMFilter ? KMFilter : null}
-            />
+                <KM modalVisible={modalKM} onOk={KMFilterHandler} onCancel={() => setModalKM(!modalKM)}/>
+                <LabelPlus
+                    icon="speedometer-outline"
+                    iconType="Ionicons"
+                    label="KM"
+                    onPress={KMHandler}
+                    onPressText={() => setModalKM(!modalKM)}
+                    onClear={() => setKMFilter(null)}
+                    data={KMFilter ? KMFilter : null}
+                />
 
-            <Price modalVisible={modalPrice} onOk={PriceFilterHandler} onCancel={() => setModalPrice(!modalPrice)}/>
-            <LabelPlus
-                icon="logo-usd"
-                iconType="Ionicons"
-                label="Price"
-                onPress={PriceHandler}
-                onPressText={() => setModalPrice(!modalPrice)}
-                onClear={() => setPriceFilter(null)}
-                data={PriceFilter ? PriceFilter : null}
-            />
+                <Price modalVisible={modalPrice} onOk={PriceFilterHandler} onCancel={() => setModalPrice(!modalPrice)}/>
+                <LabelPlus
+                    icon="logo-usd"
+                    iconType="Ionicons"
+                    label="Price"
+                    onPress={PriceHandler}
+                    onPressText={() => setModalPrice(!modalPrice)}
+                    onClear={() => setPriceFilter(null)}
+                    data={PriceFilter ? PriceFilter : null}
+                />
 
-            <Brand modalVisible={modalBrand} onOk={BrandFilterHandler} onCancel={() => setModalBrand(!modalBrand)}/>
-            <LabelPlus
-                icon="car-sport-outline"
-                iconType="Ionicons"
-                label="Brand"
-                onPress={BrandHandler}
-                onPressText={() => setModalBrand(!modalBrand)}
-                onClear={() => setBrandFilter(null)}
-                data={BrandFilter ? BrandFilter : null}
-            />
+                <Brand modalVisible={modalBrand} onOk={BrandFilterHandler} onCancel={() => setModalBrand(!modalBrand)}/>
+                <LabelPlus
+                    icon="car-sport-outline"
+                    iconType="Ionicons"
+                    label="Brand"
+                    onPress={BrandHandler}
+                    onPressText={() => setModalBrand(!modalBrand)}
+                    onClear={() => setBrandFilter(null)}
+                    data={BrandFilter ? BrandFilter : null}
+                />
 
-            <Model modalVisible={modalModel} onCancel={() => setModalModel(!modalModel)}/>
-            <LabelPlus
-                icon="car-sport-outline"
-                iconType="Ionicons"
-                label="Model"
-                onPress={ModelHandler}
-            />
+                <Model modalVisible={modalModel} onCancel={() => setModalModel(!modalModel)}/>
+                <LabelPlus
+                    icon="car-sport-outline"
+                    iconType="Ionicons"
+                    label="Model"
+                    onPress={ModelHandler}
+                />
 
-            <Version modalVisible={modalVersion} onCancel={() => setModalVersion(!modalVersion)}/>
-            <LabelPlus
-                icon="car-sport-outline"
-                iconType="Ionicons"
-                label="Version"
-                onPress={VersionHandler}
-            />
+                <Version modalVisible={modalVersion} onCancel={() => setModalVersion(!modalVersion)}/>
+                <LabelPlus
+                    icon="car-sport-outline"
+                    iconType="Ionicons"
+                    label="Version"
+                    onPress={VersionHandler}
+                />
 
-            <Year modalVisible={modalYear} onOk={YearFilterHandler} onCancel={() => setModalYear(!modalYear)}/>
-            <LabelPlus
-                icon="calendar-outline"
-                iconType="Ionicons"
-                label="Year"
-                onPress={YearHandler}
-                onPressText={() => setModalYear(!modalYear)}
-                onClear={() => setYearFilter(null)}
-                data={YearFilter ? YearFilter : null}
-            />
+                <Year modalVisible={modalYear} onOk={YearFilterHandler} onCancel={() => setModalYear(!modalYear)}/>
+                <LabelPlus
+                    icon="calendar-outline"
+                    iconType="Ionicons"
+                    label="Year"
+                    onPress={YearHandler}
+                    onPressText={() => setModalYear(!modalYear)}
+                    onClear={() => setYearFilter(null)}
+                    data={YearFilter ? YearFilter : null}
+                />
 
-            <Color modalVisible={modalColor} onCancel={() => setModalColor(!modalColor)}/>
-            <LabelPlus
-                icon="color-palette-outline"
-                iconType="Ionicons"
-                label="Color"
-                onPress={ColorHandler}
-            />
+                <Color modalVisible={modalColor} onCancel={() => setModalColor(!modalColor)}/>
+                <LabelPlus
+                    icon="color-palette-outline"
+                    iconType="Ionicons"
+                    label="Color"
+                    onPress={ColorHandler}
+                />
 
-            <Transmission modalVisible={modalTransmission} onCancel={() => setModalTransmission(!modalTransmission)}/>
-            <LabelPlus
-                icon="gears"
-                iconType="FontAwesome"
-                label="Transmission"
-                onPress={TransmissionHandler}
-            />
+                <Transmission modalVisible={modalTransmission} onOk={TransmissionFilterHandler} onCancel={() => setModalTransmission(!modalTransmission)}/>
+                <LabelPlus
+                    icon="gears"
+                    iconType="FontAwesome"
+                    label="Transmission"
+                    onPress={TransmissionHandler}
+                    onPressText={() => setModalTransmission(!modalTransmission)}
+                    onClear={() => setTransmissionFilter(null)}
+                    data={TransmissionFilter ? TransmissionFilter : null}
+                />
 
-            <Combustion modalVisible={modalCombustion} onCancel={() => setModalCombustion(!modalCombustion)}/>
-            <LabelPlus
-                icon="local-gas-station"
-                iconType="MaterialIcons"
-                label="Combustion"
-                onPress={CombustionHandler}
-            />
+                <Combustion modalVisible={modalCombustion} onOk={CombustionFilterHandler} onCancel={() => setModalCombustion(!modalCombustion)}/>
+                <LabelPlus
+                    icon="local-gas-station"
+                    iconType="MaterialIcons"
+                    label="Combustion"
+                    onPress={CombustionHandler}
+                    onPressText={() => setModalCombustion(!modalCombustion)}
+                    onClear={() => setCombustionFilter(null)}
+                    data={CombustionFilter ? CombustionFilter : null}
+                />
 
-            <Options modalVisible={modalOptions} onCancel={() => setModalOptions(!modalOptions)}/>
-            <LabelPlus
-                icon="add-circle"
-                iconType="Ionicons"
-                label="Options"
-                onPress={OptionsHandler}
-            />
+                <Options modalVisible={modalOptions} onCancel={() => setModalOptions(!modalOptions)}/>
+                <LabelPlus
+                    icon="add-circle"
+                    iconType="Ionicons"
+                    label="Options"
+                    onPress={OptionsHandler}
+                />
 
-            <Armored modalVisible={modalArmored} onCancel={() => setModalArmored(!modalArmored)}/>
-            <LabelPlus
-                icon="shield-outline"
-                iconType="Ionicons"
-                label="Armored"
-                onPress={ArmoredHandler}
-            />
+                <Armored modalVisible={modalArmored} onCancel={() => setModalArmored(!modalArmored)}/>
+                <LabelPlus
+                    icon="shield-outline"
+                    iconType="Ionicons"
+                    label="Armored"
+                    onPress={ArmoredHandler}
+                />
 
-            <Doors modalVisible={modalDoors} onCancel={() => setModalDoors(!modalDoors)}/>
-            <LabelPlus
-                icon="car-door"
-                iconType="MaterialCommunityIcons"
-                label="Doors"
-                onPress={DoorsHandler}
-            />
+                <Doors modalVisible={modalDoors} onCancel={() => setModalDoors(!modalDoors)}/>
+                <LabelPlus
+                    icon="car-door"
+                    iconType="MaterialCommunityIcons"
+                    label="Doors"
+                    onPress={DoorsHandler}
+                />
 
-            <License modalVisible={modalEndLicense} onCancel={() => setModalEndLicense(!modalEndLicense)}/>
-            <LabelPlus
-                icon="credit-card"
-                iconType="Octicons"
-                label="End of license"
-                onPress={EndLicenseHandler}
-            />
+                <License modalVisible={modalEndLicense} onCancel={() => setModalEndLicense(!modalEndLicense)}/>
+                <LabelPlus
+                    icon="credit-card"
+                    iconType="Octicons"
+                    label="End of license"
+                    onPress={EndLicenseHandler}
+                />
 
-            <View style={styles.buttonContainer}>
+
+                <View style={styles.buttonContainer}>
+                
+                    <FlatButton onPress={clearFilterHandler} style={{ textDecorationLine: "underline", color: GlobalStyles.colors.dangerText}}>
+                        Clear Filter
+                    </FlatButton>
+                </View>
+            </ScrollView>
+
+            <View style={styles.floatingButton}>
                 <Button>
                     Search
                 </Button>
-                <FlatButton onPress={clearFilterHandler} style={{ textDecorationLine: "underline", color: GlobalStyles.colors.dangerText}}>
-                    Clear Filter
-                </FlatButton>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
@@ -311,12 +358,13 @@ const styles = StyleSheet.create({
     buttonContainer: {
         padding: 12,
         backgroundColor: GlobalStyles.colors.header,
+        paddingBottom: 75
     },
     floatingButton: {
         position: "absolute",
-        bottom: 50,
-        left: 5,
+        bottom:0,
+        alignSelf:'flex-end',
         width: '100%',
-        backgroundColor: 'red'
+        padding: 12
     }
 })

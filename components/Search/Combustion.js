@@ -2,8 +2,12 @@ import { StyleSheet, View, FlatList } from "react-native";
 
 import ModalSeach from "./UX/ModalSeach";
 import LabelCheckbox from "./UX/LabelCheckbox";
+import { useContext } from "react";
+import { SearchContext } from "../../store/search-context";
 
 function Combustion({modalVisible, onCancel, onOk}) {
+
+    const searchCtx = useContext(SearchContext);
 
     const CombustionOptions = [
         {id: 0, label: 'Diesel', selected: false},
@@ -13,14 +17,27 @@ function Combustion({modalVisible, onCancel, onOk}) {
         {id: 4, label: 'Gasoline & Alcohol', selected: false},
         {id: 5, label: 'Alcohol', selected: false},
         {id: 6, label: 'Electric', selected: false},
-    ]
+    ];
+
+    function onOkHandler() {
+        const selected = [];
+        for(const combustion of CombustionOptions) {
+            if(combustion.selected == true) {
+                selected.push(combustion.label);
+            }
+        }
+
+        searchCtx.setCombustion(selected);
+
+        onOk();
+    }
 
     return (
         <ModalSeach 
             modalVisible={modalVisible} 
             title="Combustion"
             onCancel={onCancel}
-            onOk={onOk}
+            onOk={onOkHandler}
         >
             <View style={styles.container}>
                 <FlatList
@@ -31,6 +48,7 @@ function Combustion({modalVisible, onCancel, onOk}) {
                         <LabelCheckbox 
                             isChecked={item.selected} 
                             label={item.label}
+                            onCheck={() => item.selected = !item.selected}
                         />
                     }
                 />
